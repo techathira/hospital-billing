@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+ 
+  <link rel="stylesheet" href'"../../css/sidebar-menu.css">
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/sidebar-menu.css">
+
+
+   
+  <script src="../../js/jquery.min.js"></script> 
+  <script src="../../js/bootstrap.min.js"></script> 
+  <script src="../../js/angular.min.js"></script>
+  <script src="../../js/jquery-ui.js"></script>
+  
+<script src="../../js/custom.js"></script>
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+  <script>
+  $(function() {
+    $( "#p_id" ).autocomplete({
+      source: 'service.php'
+    });
+  });
+  </script>
+  
+
+</head>
+
+<body ng-app="reception">
+
+
+<div class=" container-fluid" >
+<div class="row"  ng-controller="reception_controller" >
+ <div ng-include="'../include/header.html'">
+ </div>
+
+
+<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 adjust-margin disp-dept-cont">
+<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9">
+		
+ </div>
+
+  
+
+<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3"> 
+		<!-- <button type="button" class="btn add-dep-btn font-12 adjust-add pull-right" data-toggle = "modal" data-target = "#addpatient" ><span><span><img src="../../icons/add.png" ></img></span class="font-12">&nbsp;&nbsp;<span>Register</span></span></button>-->
+ </div>
+ </div>
+ 
+
+<div class="">
+<div id="allot" >
+<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+		
+<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3">&nbsp;</div>  
+
+  		
+</div>	
+	
+
+
+<div id="shift" >
+<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+	<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3">&nbsp;</div>  
+			<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 disp-dept-cont" id="box">
+							<div class="col-md-12 col-sm-12 col-lg-12">	
+									  <input type="text" required class="module-input "  ng-model="patient_id" ng-change="show_service_details()">
+								  <span class="bar"></span>
+								  <label class="label-text">Enter Patient Id/ Email Id/ Phone No</label>
+							</div>
+			</div>
+			   
+</div>
+
+	  
+		  <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
+			<div class="col-md- 12 col-lg-12 col-xs-12 col-sm-12" >
+				  <div class="col-md-3 col-lg-3 col-xs-3 col-sm-3">&nbsp;</div>
+				  <div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 ">
+						<div class="col-md-2 col-lg-2 col-xs-2 col-sm-2"></div>
+						<div class="col-md-8 col-lg-8 col-xs-8 col-sm-8 room-beds-tab tab-shadow">
+						       <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 align-header"> <span class="font-lato-18-bold"> Beds Information </span></div>
+								<table id="tbl"  class="table  table-condensed " cellpadding="10"  cellspacing="10">
+									<thead height="100" >
+									  <tr class=" font-14 font-os-semibold border-btm" >
+										<th class=" left-padding" >Sl No</th>
+										<th >Date</th>
+										<th >Description</th>
+										<th >Amount</th>
+										<th >Qty</th>
+										<th >Total Price</th>
+										<th >Payment Mode</th>
+										
+									
+									  </tr>
+									</thead>
+									<tbody>
+									 <tr class="border-btm" ng-repeat="names in display_service_show" > <!-- ng-repeat=" employee in empdata |  filter:searchbox" --> 
+										<td class=" left-padding" >{{$index+1}}</td>
+										<td>{{names.payment_date}}</td>
+										<td>{{names.service_name}}</td>
+										<td  >{{names.price}}</td>
+										<td  >{{names.qty}}</td>
+										<td  >{{names.price * names.qty}}</td>
+										<td >{{names.payment_mode}}</td>
+										
+									</tr>
+									
+	
+									  
+								
+									</tbody>
+					  </table>
+				</div>
+						<div class="col-md-2 col-lg-2 col-xs-2 col-sm-2"></div>
+				  
+				   <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
+				</div>			
+		</div>			
+</div>		
+</div>
+
+
+
+
+
+
+
+
+<!-- payment section Ends here --> 
+
+
+
+
+
+
+
+
+
+
+
+	
+			
+						
+				
+			
+			
+
+   
+   
+   
+   
+  
+
+
+ 
+ 
+ 
+ 
+ 
+ </div>
+
+ </div> <!-- Row End -->
+</div>  <!-- Container End -->
+<script src="../../js/datepicker/jquery.js"></script>
+<script src="../../js/datepicker/jquery-ui.js"></script>
+
+<script>
+   $("#dob").datepicker({
+	inline: true
+   });
+
+
+</script>
+<script src="../../js/receptionscript/receptionscript.js"></script> 
+
+</body> <!-- Body End -->
+
+</html>

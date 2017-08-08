@@ -1,0 +1,20 @@
+SELECT oc.patient_id as patient_id,CONCAT('Consultation fees',' ',d.doctor_name) as description,oc.amount as amount FROM op_consultation oc,doctors d WHERE consulted_date='2016-10-13' and patient_id =1 and oc.doctor_id=d.doctor_id UNION select os.patient_id as patient_id,s.service_name as description,os.amount as amount from op_service_taken os,services s where os.patient_id=1 and os.date = '2016-10-13' and os.service_id=s.service_id
+
+
+
+SELECT oc.patient_id as patient_id,CONCAT('Consultation fees',' ',d.doctor_name) as description,COUNT(oc.patient_id) as quantity,oc.amount as amount FROM op_consultation oc,doctors d WHERE consulted_date='2016-10-13' and patient_id =1 and oc.doctor_id=d.doctor_id UNION select os.patient_id as patient_id,s.service_name as description,COUNT(os.service_id) as quantity,os.amount as amount from op_service_taken os,services s where os.patient_id=1 and os.date = '2016-10-13' and os.service_id=s.service_id GROUP by os.service_id
+
+
+//Query with quantity amount and total price 
+
+SELECT oc.patient_id as patient_id,CONCAT('Consultation fees',' ',d.doctor_name) as description,COUNT(oc.patient_id) as quantity,oc.amount as amount,amount * COUNT(oc.patient_id) as total FROM op_consultation oc,doctors d WHERE consulted_date='2016-10-13' and patient_id =1 and oc.doctor_id=d.doctor_id UNION select os.patient_id as patient_id,s.service_name as description,COUNT(os.service_id) as quantity,os.amount as amount,amount * COUNT(os.service_id) as total from op_service_taken os,services s where os.patient_id=1 and os.date = '2016-10-13' and os.service_id=s.service_id GROUP by os.service_id
+
+
+
+
+SELECT oc.patient_id as patient_id,CONCAT('Consultation fees',' ',d.doctor_name) as description,COUNT(oc.patient_id) as quantity,oc.amount as amount,amount * COUNT(oc.patient_id) as total FROM op_consultation oc,doctors d WHERE oc.patient_id IS NOT NULL AND oc.consulted_date='2016-10-13' and oc.patient_id =1 and oc.doctor_id=d.doctor_id GROUP BY oc.patient_id UNION select os.patient_id as patient_id,s.service_name as description,COUNT(os.service_id) as quantity,os.amount as amount,amount * COUNT(os.service_id) as total from op_service_taken os,services s where os.patient_id=1 and os.date = '2016-10-13' and os.service_id=s.service_id GROUP by os.service_id
+
+
+
+
+SELECT s.service_id as serviceID,COUNT(s.service_id) as quantity,s.amount as amount from service_taken s where s.patient_id=1 GROUP by s.service_id,s.amount

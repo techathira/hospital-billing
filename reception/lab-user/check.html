@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>AngularJS Print Directive of html templates </title>
+  <link rel="stylesheet" href="style.css" />
+ 
+  <script src="../../js/angular.min.js"></script>
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', function($scope) {
+      $scope.printToCart = function(printSectionId) {
+        var innerContents = document.getElementById(printSectionId).innerHTML;
+        var popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+		alert(popupWinindow);
+        popupWinindow.document.open();
+        popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + innerContents + '</html>');
+        popupWinindow.document.close();
+      }
+    });
+  </script>
+</head>
+
+<body  ng-app="myApp">
+  <div ng-controller="myCtrl">
+    <h1>AngularJS Print html templates</h1>
+    <form novalidate id="printSectionId">
+      First Name:
+      <input type="text" ng-model="firstName" class="tb8">
+      <br>
+      <br> Last Name:
+      <input type="text" ng-model="lastName" class="tb8">
+      <br>
+      <br>
+      <button ng-click="Submit()" class="button">Submit</button>
+      <button ng-click="printToCart('printSectionId')" class="button">Print</button>
+    </form>
+  </div>
+  <div>
+    <br/>
+    <br/><a href="http://www.code-sample.com/2015/07/angularjs-2-forms-validation.html" target="_blank">More About AngularJS Print...</a></div>
+</body>
+
+</html>
+/* Larger Side Border */
+.tb8 {
+	width: 230px;
+	height:24px;
+	border: 1px solid #3366FF;
+	border-left: 4px solid #3366FF;
+}
+
+.button{
+border:4px solid #26759E;-webkit-box-shadow: #878787 0px 2px 2px ;-moz-box-shadow: #878787 0px 2px 2px ; box-shadow: #878787 0px 2px 2px ; -webkit-border-radius: 23px; -moz-border-radius: 23px;border-radius: 23px;font-size:13px;font-family:arial, helvetica, sans-serif; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: 2px 2px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #3093C7; background-image: -webkit-gradient(linear, left top, left bottom, from(#3093C7), to(#1C5A85));
+ background-image: -webkit-linear-gradient(top, #3093C7, #1C5A85);
+ background-image: -moz-linear-gradient(top, #3093C7, #1C5A85);
+ background-image: -ms-linear-gradient(top, #3093C7, #1C5A85);
+ background-image: -o-linear-gradient(top, #3093C7, #1C5A85);
+ background-image: linear-gradient(to bottom, #3093C7, #1C5A85);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3093C7, endColorstr=#1C5A85);
+}
+
+.button:hover{
+ border:4px solid #26759E;
+ background-color: #26759E; background-image: -webkit-gradient(linear, left top, left bottom, from(#26759E), to(#133D5B));
+ background-image: -webkit-linear-gradient(top, #26759E, #133D5B);
+ background-image: -moz-linear-gradient(top, #26759E, #133D5B);
+ background-image: -ms-linear-gradient(top, #26759E, #133D5B);
+ background-image: -o-linear-gradient(top, #26759E, #133D5B);
+ background-image: linear-gradient(to bottom, #26759E, #133D5B);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#26759E, endColorstr=#133D5B);
+}
