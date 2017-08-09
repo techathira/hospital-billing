@@ -1,2 +1,0 @@
-09-Aug-17
-	Changes in login screen for better view.
