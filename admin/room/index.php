@@ -284,7 +284,7 @@ else{
 <div class = "modal-body body-size row model-bg">
 	<form  novalidate class="form-horizontal" name="add_dept" id="add_dept" method="post">
 		  
-		    <div class="form-group align-input-space font-lato-12-bold" ng-repeat="ward in display_beds">
+		    <div class="form-group align-input-space font-lato-12-bold" ng-repeat="ward in display_beds_for_room">
 		  	
 				
 					<label class="control-label col-sm-3 col-lg-3 col-xs-12 col-md-3 align-label" style="margin-top: 0%;" for="name" >{{ward.ward_name}}</label>

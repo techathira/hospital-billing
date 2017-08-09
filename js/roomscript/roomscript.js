@@ -105,16 +105,15 @@ app.controller('category_controller', ['$scope', '$http', function ($scope, $htt
 		              //alert("comimg in update");
 					  $http.post("display_beds.php",{room_id : room_id})
 						.success(function(data,status,headers,config){
-							 //alert(data);
-							$scope.display_beds = data;
+							
+							$scope.display_beds_for_room = data;
 							
 						})
 						.error(function() {
 							$scope.data = "error in fetching data";
 						});  
 				 
-				 
-	
+					
         };
 		
 		
