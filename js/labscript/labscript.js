@@ -14,6 +14,16 @@ app.controller('lab_controller', ['$scope', '$http', function ($scope, $http) {
 		$scope.totalprice=0;
 		//on load funtions
 		//display test
+		$scope.show_test_div=false;
+		$scope.show_package=false;
+		$scope.click=function(){
+			$scope.show_test_div=true;
+		$scope.show_package=false;
+		};
+		$scope.click_package=function(){
+			$scope.show_test_div=false;
+		$scope.show_package=true;
+		};
 		$http.get("display_test.php")
                 .success(function(data){
 				    

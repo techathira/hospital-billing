@@ -66,12 +66,19 @@ else{
   <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
 	<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3"></div>
 		<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 ">
-			<div class="row " style="padding-bottom:10px;">
-	        <div class="col-md-6 col-xs-6 col-lg-6 col-xs-6"> <input type="text" class="form-control doctor-search-btn " id="usr" placeholder="Search Test Name" ng-model="serachbox"  >
-            </div>
-
-          
-	 </div>
+		       <div class="col-md-12 col-sm-12 col-lg-12 form-group align-input-space font-lato-12-bold">
+					  <div class="col-md-4 col-sm-4 col-lg-4 ">&nbsp;</div>
+					        
+						  <label class="control-label col-sm-2 col-lg-2 col-xs-12 col-md-2 align-label lable-add-input" for="name"> Select </label>
+						  <div class=" col-sm-3 col-lg-3 col-xs-12 col-md-3" style="height: 100%;" >
+							 <input type="radio" name="tests" value="test" id="test" selected ng-model="flag" style="margin-left: -29%;" ng-click="click()" ng-model="test" > Test
+							<input type="radio" name="tests" value="package" id="package" ng-model="flag" style=" margin-left: 20%;"  ng-click="click_package()" ng-model="test"> Package<br>
+						  </div>
+						  <div class=" col-sm-3 col-lg-3 col-xs-12 col-md-3">
+						  
+						  </div>
+						</div>
+		
 			
 	  </div>
  </div>
@@ -83,7 +90,14 @@ else{
  <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
 	<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3">&nbsp;</div>
 
-	 <div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 disp-dept-cont" id="box">
+	 <div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 disp-dept-cont" id="box" ng-show="show_test_div">
+	  				<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">&nbsp;</div>
+			<div class="row " style="padding-bottom:10px;">
+	        <div class="col-md-6 col-xs-6 col-lg-6 col-xs-6"> <input type="text" class="form-control doctor-search-btn " id="usr" placeholder="Search Test Name" ng-model="serachbox"  >
+            </div>
+
+          
+	 </div>
      <div class="row " style="padding-bottom:10px;">
 	        <p class="lab-test-p" >	Test Category<p>
 	 </div>
@@ -131,9 +145,9 @@ else{
  </div>
     
 	
-	<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3">&nbsp;</div>
 
-	 <div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 disp-dept-cont" id="box">
+
+	 <div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 disp-dept-cont" id="box" ng-show="show_package">
 	 <div class="row " style="padding-bottom:10px;">
 	        <div class="col-md-6 col-xs-6 col-lg-6 col-xs-6"> <input type="text" class="form-control doctor-search-btn " id="usr" placeholder="Search Package Name" ng-model="serachbox1"  >
             </div>

@@ -16,7 +16,7 @@ app.controller('category_controller', ['$scope', '$http', function ($scope, $htt
                 .success(function(data){
 				     //alert(data);
                     $scope.display_category = data;
-					console.log(data);
+					
                 })
                 .error(function() {
                     $scope.data = "error in fetching data";
@@ -124,7 +124,7 @@ app.controller('category_controller', ['$scope', '$http', function ($scope, $htt
 	  $scope.add_beds = function() {
 		
 		           
-	                    console.log($scope.wardids);
+	                    
 						$http({     
 						                method : 'POST' ,
 										url: 'add_beds.php',
@@ -162,7 +162,7 @@ app.controller('category_controller', ['$scope', '$http', function ($scope, $htt
                 .success(function(data){
 				     //alert(data);
                     $scope.display_category = data;
-					console.log(data);
+				
                 })
                 .error(function() {
                     $scope.data = "error in fetching data";
