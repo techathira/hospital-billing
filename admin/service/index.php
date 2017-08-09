@@ -74,10 +74,17 @@ else{
  
  <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
 	<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3"></div>
+	<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 ">
+	     <div>
+					      <input type="text" class="form-control doctor-search-btn " id="usr" placeholder="Search Service Name" ng-model="serachbox"  >
+					   </div>
+	</div>
+	<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3"></div>
 
 	<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 table-top-space">
 					
 					  
+					   
 						 <table id="tbl"  class="table tble-size  table-condensed tbl-shadow " cellpadding="10"  cellspacing="10">
 									<thead>
 									  <tr class=" font-14 font-os-semibold border-btm" >
@@ -89,7 +96,7 @@ else{
 									  </tr>
 									</thead>
 									<tbody>
-									  <tr class="border-data-btm" ng-repeat="service in display_service" > 
+									  <tr class="border-data-btm" ng-repeat="service in display_service | filter:serachbox"" > 
 										
 										<td class=" left-padding" >{{service.service_id}}</td>
 										<td> {{service.service_name}}</td>

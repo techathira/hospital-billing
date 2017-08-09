@@ -45,35 +45,55 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 						                 alert("error");
 					   }); 
 		$scope.get_all_report=function(){ 
-								$scope.show_test=false;
-						$scope.show_package=false;
-						$scope.show_op=false;
-						$scope.show_ip=false;
-						$scope.show_all=true;
+		               $scope.re.fromdate="";
+		               $scope.re.todate="";
+					   $scope.re.recep_id="";
+					   $scope.show_all_inside=false;
+					   $scope.show_test=false;
+					   $scope.show_package=false;
+					   $scope.show_op=false;
+					   $scope.show_ip=false;
+					   $scope.show_all=true;
 		};
 		$scope.get_ip_report=function(){ 
-								$scope.show_test=false;
+						$scope.ip.fromdate="";
+						$scope.ip.todate="";
+					    $scope.ip.recep_id="";
+					    $scope.show_ip_div=false;
+						$scope.show_test=false;
 						$scope.show_package=false;
 						$scope.show_op=false;
 						$scope.show_ip=true;
 						$scope.show_all=false;
 		};
 		$scope.get_op_report=function(){
-								$scope.show_test=false;
+						$scope.op.fromdate="";
+						$scope.op.todate="";
+  					    $scope.op.recep_id="";
+						$scope.show_op_div=false;
+						$scope.show_test=false;
 						$scope.show_package=false;
 						$scope.show_ip=false;
 						$scope.show_op=true;
 						$scope.show_all=false;
 		};
 		$scope.get_tests_report=function(){
-								$scope.show_test=true;
+						$scope.package1.fromdate="";
+						$scope.package1.todate="";
+					    $scope.package1.recep_id="";
+					    $scope.show_package_div=false;
+						$scope.show_test=true;
 						$scope.show_package=false;
 						$scope.show_ip=false;
 						$scope.show_op=false;
 						$scope.show_all=false;
 		};
 		$scope.get_package_report=function(){
-								$scope.show_test=false;
+					    $scope.op_test.fromdate="";
+					    $scope.op_test.todate="";
+						$scope.op_test.recep_id="";
+						$scope.show_op_test_div=false;
+    					$scope.show_test=false;
 						$scope.show_package=true;
 						$scope.show_ip=false;
 						$scope.show_op=false;
@@ -81,7 +101,66 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 		};
 		
 		
-	
+	   $scope.reset_from_date_reports=function(){
+		   $scope.re.todate="";
+		   $scope.re.recep_id="";
+		   $scope.show_all_inside=false;
+		   
+	   };
+	   $scope.reset_to_date_reports=function(){
+		   
+		   $scope.re.recep_id="";
+		   $scope.show_all_inside=false;
+		   
+	   };
+	   $scope.reset_from_date_op_reports=function(){
+		   $scope.op.todate="";
+		   $scope.op.recep_id="";
+		   $scope.show_op_div=false;
+		   
+	   };
+	   $scope.reset_to_date_op_reports=function(){
+		   
+		  $scope.op.recep_id="";
+		   $scope.show_op_div=false;
+		   
+	   };
+		$scope.reset_from_date_ip_reports=function(){
+		   $scope.ip.todate="";
+		   $scope.ip.recep_id="";
+		   $scope.show_ip_div=false;
+		   
+	   };
+	   $scope.reset_to_date_ip_reports=function(){
+		   
+		  $scope.ip.recep_id="";
+		   $scope.show_ip_div=false;
+		   
+	   };
+		$scope.reset_from_date_pack_reports=function(){
+		   $scope.package1.todate="";
+		   $scope.package1.recep_id="";
+		   $scope.show_package_div=false;
+		   
+	   };
+	   $scope.reset_to_date_pack_reports=function(){
+		   
+		  $scope.package1.recep_id="";
+		   $scope.show_package_div=false;
+		   
+	   };
+		$scope.reset_from_date_test_reports=function(){
+		   $scope.op_test.todate="";
+		   $scope.op_test.recep_id="";
+		   $scope.show_op_test_div=false;
+		   
+	   };
+	   $scope.reset_to_date_test_reports=function(){
+		   
+		  $scope.op_test.recep_id="";
+		   $scope.show_test_div=false;
+		   
+	   };
 		
 		 $scope.cash=0;
 		                $scope.card=0;

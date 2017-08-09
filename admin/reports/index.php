@@ -64,10 +64,10 @@ else{
 		  <h3>REPORTS</h3>
 		
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             From Date <input  class="datepicker" ng-model="re.fromdate" />
+             From Date <input  class="datepicker" ng-model="re.fromdate" ng-change="reset_from_date_reports()" />
 		   </div>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             To Date <input class="datepicker" ng-model="re.todate" />
+             To Date <input class="datepicker" ng-model="re.todate" ng-change="reset_to_date_reports()" />
 		   </div>
 		     <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
              <select class="form-control drop-down-btn" id="country" name="country" ng-model="re.recep_id" ng-change="displayallreports()">
@@ -146,10 +146,10 @@ else{
 		  <h3>OP REPORTS</h3>
 		
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             From Date <input  class="datepicker" ng-model="op.fromdate" />
+             From Date <input  class="datepicker" ng-model="op.fromdate" ng-change="reset_from_date_op_reports()" />
 		   </div>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             To Date <input class="datepicker" ng-model="op.todate"/>
+             To Date <input class="datepicker" ng-model="op.todate" ng-change="reset_to_date_op_reports()"/>
 		   </div>
 		    <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
              <select class="form-control drop-down-btn" id="country" name="country" ng-model="op.recep_id" ng-change="displayreports()">
@@ -228,10 +228,10 @@ else{
 		<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 ">
 		    <h3>IP REPORTS</h3>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             From Date <input  class="datepicker" ng-model="ip.fromdate" />
+             From Date <input  class="datepicker" ng-model="ip.fromdate" ng-change="reset_from_date_ip_reports()" />
 		   </div>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             To Date <input class="datepicker" ng-model="ip.todate"/>
+             To Date <input class="datepicker" ng-model="ip.todate" ng-change="reset_to_date_ip_reports()"/>
 		   </div>
 		    <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
              <select class="form-control drop-down-btn" id="country" name="country" ng-model="ip.recep_id" ng-change="displayipreports()">
@@ -326,10 +326,10 @@ else{
 		<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 ">
 		    <h3>PACKAGE REPORTS</h3>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             From Date <input  class="datepicker" ng-model="package1.fromdate" />
+             From Date <input  class="datepicker" ng-model="package1.fromdate" ng-change="reset_from_date_pack_reports()"/>
 		   </div>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             To Date <input class="datepicker" ng-model="package1.todate"/>
+             To Date <input class="datepicker" ng-model="package1.todate" ng-change="reset_to_date_pack_reports()"/>
 		   </div>
 		    <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
              <select class="form-control drop-down-btn" id="country" name="country" ng-model="package1.recep_id" ng-change="packagereport()">
@@ -417,10 +417,10 @@ else{
 		<div class="col-md-9 col-lg-9 col-xs-9 col-sm-9 ">
 		    <h3>TEST REPORTS</h3>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             From Date <input  class="datepicker" ng-model="op_test.fromdate" />
+             From Date <input  class="datepicker" ng-model="op_test.fromdate" ng-change="reset_from_date_test_reports()"/>
 		   </div>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             To Date <input class="datepicker" ng-model="op_test.todate"/>
+             To Date <input class="datepicker" ng-model="op_test.todate" ng-change="reset_to_date_test_reports()"/>
 		   </div>
 		        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
              <select class="form-control drop-down-btn" id="country" name="country" ng-model="op_test.recep_id" ng-change="testreport()">

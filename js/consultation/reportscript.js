@@ -71,8 +71,13 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 						                 alert("error");
 					   }); 
 		
-		$scope.set_from_date=function(){
+		$scope.set_to_date=function(){
 			$scope.op.todate="";
+			$scope.op.doctor_id="";
+			$scope.show_op_div=false;
+		};
+		$scope.set_from_date=function(){
+			
 			$scope.op.doctor_id="";
 			$scope.show_op_div=false;
 		};

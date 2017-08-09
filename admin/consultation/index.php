@@ -65,10 +65,10 @@ else{
 		  <h3>Consulted Doctors</h3>
 		
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             From Date <input  class="datepicker" ng-model="op.fromdate" ng-change="set_from_date()"  />
+             From Date <input  class="datepicker" ng-model="op.fromdate" ng-change="set_to_date()"  />
 		   </div>
 		   <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
-             To Date <input class="datepicker" ng-model="op.todate"/>
+             To Date <input class="datepicker" ng-model="op.todate" ng-change="set_from_date()"/>
 		   </div>
 		    <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 ">
              <select class="form-control drop-down-btn" id="country" name="country" ng-model="op.doctor_id" ng-change="display_doctor_reports()">
