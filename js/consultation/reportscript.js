@@ -71,6 +71,11 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 						                 alert("error");
 					   }); 
 		
+		$scope.set_from_date=function(){
+			$scope.op.todate="";
+			$scope.op.doctor_id="";
+			$scope.show_op_div=false;
+		};
 		 $scope.cash=0;
 		                $scope.card=0;
         $scope.display_doctor_reports = function() {
@@ -92,7 +97,7 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 										console.log(data);
 										for(var i in data)
 										{
-							                	 	$scope.total+= parseInt(data[i][6],10);	     
+							                	 	$scope.total+= parseInt(data[i][5],10);	     
 							                	 	
 										}
 										console.log($scope.total);
