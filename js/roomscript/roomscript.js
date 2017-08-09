@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var app = angular.module('category', []);
 
 app.controller('category_controller', ['$scope', '$http', function ($scope, $http) {
@@ -144,7 +144,7 @@ app.controller('category_controller', ['$scope', '$http', function ($scope, $htt
      
 }]);
 
-=======
+
 var app = angular.module('category', []);
 
 app.controller('category_controller', ['$scope', '$http', function ($scope, $http) {
@@ -291,4 +291,3 @@ app.controller('category_controller', ['$scope', '$http', function ($scope, $htt
      
 }]);
 
->>>>>>> 368fce76f7919c17770604c4be8fbf59970e5012

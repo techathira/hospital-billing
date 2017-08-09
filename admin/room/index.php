@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 session_start();
 if(isset($_SESSION['name']) && $_SESSION['name']=="admin")
@@ -332,7 +331,7 @@ else{
 </body> <!-- Body End -->
 
 </html>
-=======
+
 <?php
 session_start();
 if(isset($_SESSION['name']) && $_SESSION['name']=="admin")
