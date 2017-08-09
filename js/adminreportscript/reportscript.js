@@ -78,10 +78,10 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 						$scope.show_all=false;
 		};
 		$scope.get_tests_report=function(){
-						$scope.package1.fromdate="";
-						$scope.package1.todate="";
-					    $scope.package1.recep_id="";
-					    $scope.show_package_div=false;
+						$scope.op_test.fromdate="";
+					    $scope.op_test.todate="";
+						$scope.op_test.recep_id="";
+						$scope.show_op_test_div=false;
 						$scope.show_test=true;
 						$scope.show_package=false;
 						$scope.show_ip=false;
@@ -89,11 +89,12 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 						$scope.show_all=false;
 		};
 		$scope.get_package_report=function(){
-					    $scope.op_test.fromdate="";
-					    $scope.op_test.todate="";
-						$scope.op_test.recep_id="";
-						$scope.show_op_test_div=false;
-    					$scope.show_test=false;
+					    
+    					$scope.package1.fromdate="";
+						$scope.package1.todate="";
+					    $scope.package1.recep_id="";
+					    $scope.show_package_div=false;
+						$scope.show_test=false;
 						$scope.show_package=true;
 						$scope.show_ip=false;
 						$scope.show_op=false;
