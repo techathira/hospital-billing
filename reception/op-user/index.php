@@ -342,7 +342,7 @@ else{
 	<form class="form-horizontal"   novalidate >
 		  
 			<div class="form-group align-input-space font-lato-12-bold">
-			  <label class="control-label col-sm-3 col-lg-3 col-xs-12 col-md-3 align-label lable-add-input" for="name">Phone</label>
+			  <label class="control-label col-sm-3 col-lg-3 col-xs-12 col-md-3 align-label lable-add-input" for="name">Id or Phone</label>
 			  <div class=" col-sm-8 col-lg-8 col-xs-12 col-md-8" style="height: 100%;">
 				<input type="text" class="form-control  align-input-ele font-lato-12-bold  " ng-model="edit.patient_id" id="patientid1" ng-change="edit_patient()" >
 					
