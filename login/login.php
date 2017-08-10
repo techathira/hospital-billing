@@ -3,11 +3,56 @@ session_start();
 require_once("../database.php");
 //$data = json_decode(file_get_contents("php://input"));
 
-$username=$_POST['username'];
-$password=$_POST['password'];
+if(isset($_POST['login'])) {
+$username=mysqli_real_escape_string($con,$_POST['username']);
+$password=mysqli_real_escape_string($con,$_POST['password']);
+$user_type=mysqli_real_escape_string($con,$_POST['user_type']);	
 	
-	$sql="select * from users where username='{$username}' and password='{$password}'";
-	$res=mysqli_query($con,$sql) or die(mysqli_error($con));
+	if($user_type=="patient"){
+		$stmt = $con->prepare('select * from patient_registration where phone=? and password=?');	
+		$stmt->bind_param('is', $username,$password);
+		$stmt->execute();
+		$res = $stmt->get_result();
+		if(mysqli_num_rows($res)>=1)
+		{
+			$row=mysqli_fetch_array($res);
+			$_SESSION['name']="patient";
+			$_SESSION['user_id']=$row['patient_id'];
+			header('Location: ../patient/index.php');
+			exit();
+		}
+		else {
+			echo '<script type="text/javascript">alert("username or password not matched!!");
+			window.location="index.html";
+		</script>';
+		}
+	}
+	else if($user_type=="doctor"){
+		$stmt = $con->prepare('select * from doctors where email=? and password=?');	
+		$stmt->bind_param('ss', $username,$password);
+		$stmt->execute();
+		$res = $stmt->get_result();
+		if(mysqli_num_rows($res)>=1)
+		{
+			$row=mysqli_fetch_array($res);
+			$_SESSION['name']="doctor";
+			$_SESSION['user_id']=$row['doctor_id'];
+			header('Location: ../doctor/index.php');
+			exit();
+		}
+		else {
+			echo '<script type="text/javascript">alert("username or password not matched!!");
+			window.location="index.html";
+		</script>';
+		}
+	}
+	 else {
+	/*$sql="select * from users where username='{$username}' and password='{$password}'";
+	$res=mysqli_query($con,$sql) or die(mysqli_error($con));*/
+	$stmt = $con->prepare('select * from users where username=? and password=?');	
+	$stmt->bind_param('ss', $username,$password);
+	$stmt->execute();
+	$res = $stmt->get_result();
 	
 	if(mysqli_num_rows($res)>=1)
 	{	
@@ -30,11 +75,6 @@ $password=$_POST['password'];
 				$_SESSION['user_id']=$user_id;
 			header('Location: ../op-user/index.php');
 			exit();
-		}
-		else
-		if($type=="Lab")
-		{
-			//redirect to lab dashboard;
 		}
 		else if($type=="Reciptionist")
 		{
@@ -59,13 +99,17 @@ $password=$_POST['password'];
 	}
 	else
 	{
-		echo '<script type="text/javascript">alert("'.$username.' or '.$type.' not matched!!");
+		echo '<script type="text/javascript">alert("username or password not matched!!");
 			window.location="index.html";
 		</script>';
 		//header("location:index.html");
 		//exit();
 	}
+	
+	} //patient
 
+	}
+	
    // print json_encode($num);
    
 ?>

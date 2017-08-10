@@ -29,6 +29,17 @@
 			
 			<div class="col-md-12" style="color: #3498db!important;padding: 32px;font-size:20px;">ENTER THE DETAILS TO LOGIN</div>
 				<form action="login.php" method="post">
+				<div class="group col-md-12 col-sm-12 col-lg-12"> 
+				<div class="col-md-12 col-sm-12 col-lg-12">	
+					  <select name="user_type" class="col-md-12 col-sm-12 col-lg-12 select-user" id="" ng-model="user.user_type" required>
+					  	<option value="" selected disabled>Choose User Type</option>
+					  	<option value="staff">Staff</option>
+					  	<option value="doctor">Doctor</option>
+					  	<option value="patient">Patient</option>
+					  </select>
+				  </div>
+				</div>
+				
 				 <div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12">	
 					  <input type="text"  class="module-input" ng-model="user.username" name="username" required />
@@ -47,10 +58,11 @@
 				
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-9 col-sm-9 col-lg-9"><span><a href="" style="color:#a9a4a4;font-size:12px;">Forgot password?</a></span></div>
-				<div class="col-md-3 col-sm-3 col-lg-3 login" ><input type="submit" value="LOGIN" style="background-color: #3498db;color: white;"/></div>
+				<div class="col-md-3 col-sm-3 col-lg-3 login" ><input type="submit" value="LOGIN" class="submit-button" name="login"/></div>
 				</div>
 				</form>	
-					
+					<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12"><input type="button" value="Patient Registration" class="submit-button"/></div>
+					<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">&nbsp;</div>
 		</div>
 		
 	</div>
