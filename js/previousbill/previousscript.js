@@ -60,7 +60,7 @@ app.controller('previous_controller', ['$scope', '$http', function ($scope, $htt
 								.success(function(data){
 									 
 									$scope.display_patient_ip=data;
-									console.log(data);
+									
 									 var total_ip=0; 
 									 var cashtotal_ip=0; 
 									 var cardtotal_ip=0; 
@@ -261,7 +261,7 @@ app.controller('previous_controller', ['$scope', '$http', function ($scope, $htt
 										
 								}).success(function(data){						
 														$scope.show_test_taken=data;
-														console.log(data);
+														
 														
 														   setTimeout(function(){
 														var innerContents = document.getElementById("test_printsection").innerHTML;

@@ -120,7 +120,7 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 										
 								}).success(function(data){
 										$scope.display_op=data;
-										console.log(data);
+										
 										for(var i in data)
 										{
 							                	 	$scope.total+= parseInt(data[i][4],10);	     
@@ -155,7 +155,7 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 										
 								}).success(function(data){
 										$scope.display_ip=data;
-                                         console.log(data);
+                                         
 										for(var i in data)
 										{
 							                	 	$scope.totalamt+= parseInt(data[i][4],10);	     

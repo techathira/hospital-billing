@@ -335,7 +335,7 @@ app.controller('user_lab_controller', ['$scope', '$http', function ($scope, $htt
 							             
 						               
 										$scope.screen_print = data;
-                                         console.log(data);
+
 									
 									  setTimeout(function(){
 														var innerContents = document.getElementById("printsection").innerHTML;

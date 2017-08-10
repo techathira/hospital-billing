@@ -99,13 +99,13 @@ app.controller('reports_controller', ['$scope', '$http', function ($scope, $http
 										
 								}).success(function(data){
 										$scope.display_op=data;
-										console.log(data);
+										
 										for(var i in data)
 										{
 							                	 	$scope.total+= parseInt(data[i][5],10);	     
 							                	 	
 										}
-										console.log($scope.total);
+										
 						       }).error(function(data, status) {
 						                 alert("error");
 					   }); 

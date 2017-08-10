@@ -10,9 +10,10 @@ $age=$data->age;
 $gender=$data->gender;
 $fee=$data->fee;
 	$photo="";
+$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+$password = substr( str_shuffle( $chars ), 0, 8 );
 
-
-$sql="insert into doctors(doctor_name,email,phone,experience,age,gender,specialization,fee,photo) values('{$name}','{$email}','{$phone}','{$experience}','{$age}','{$gender}','{$specialzation}','{$fee}','{$photo}')";
+$sql="insert into doctors(doctor_name,email,phone,experience,age,gender,specialization,fee,photo,password) values('{$name}','{$email}','{$phone}','{$experience}','{$age}','{$gender}','{$specialzation}','{$fee}','{$photo}','{$password}')";
 $res=mysqli_query($con,$sql);
 
 $display="select * from doctors";

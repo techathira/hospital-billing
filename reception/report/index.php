@@ -517,8 +517,14 @@ else{
 				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"> 	
 			<div class="col-md-2 col-lg-2 col-sm-2 col-xs-12">&nbsp;</div>
 			<div class="col-md-10 col-lg-10 col-sm-10 col-xs-12" style="margin-left:20px;margin-top:30px">
-				<table style="border:1px solid black;width:100%;">
-					<tr style="height: 25px;">
+				<table style="border:1px solid black;width:100%;page-break-inside:auto">
+							<thead style=" display:table-header-group" >
+						<tr style="page-break-inside:avoid; page-break-after:auto"><th>heading</th></tr>
+					</thead>
+					<tfoot style="display:table-footer-group">
+						<tr style="page-break-inside:avoid; page-break-after:auto"><td>notes</td></tr>
+					</tfoot>
+					<tr style="height: 25px;page-break-inside:avoid; page-break-after:auto">
 						<th style="border-right:1px solid black;border-bottom:1px solid black;padding-left:5px;width:10%;">Sl.no</th>
 						<th style="border-right:1px solid black;border-bottom:1px solid black;padding-left:5px;width:10%;">Patient ID</th>
 						<th style="border-right:1px solid black;border-bottom:1px solid black;padding-left:5px;width:25%">Discription</th>
@@ -527,7 +533,7 @@ else{
 						<th style="border-right:1px solid black;border-bottom:1px solid black;padding-left:5px;width:15%">Card</th>
 						<th style="border-right:1px solid black;border-bottom:1px solid black;padding-left:5px;">Amount</th>
 					</tr>
-					<tr style="height:10px;" ng-repeat="op in display_op">
+					<tr style="height:10px;page-break-inside:avoid; page-break-after:auto" ng-repeat="op in display_op">
 						<td style="border-right:1px solid black;padding-left:5px;padding:4px;">{{$index+1}}</td>
 						<td style="border-right:1px solid black;padding-left:5px;">{{op.patient_id}}</td>
 						<td style="border-right:1px solid black;padding-left:5px;">{{op.description}}</td>
@@ -537,8 +543,8 @@ else{
 						<td style="border-right:1px solid black;padding-left:5px;">{{op.totalamt}}</td>
 					</tr>
 			  	
-					<tr>
-					   <td colspan="3" style="border-right:1px solid black;border-top:1px solid black;padding-left:5px;text-align:right;padding:2px;">Cash Total:{{cash}}</td>
+					<tr style="page-break-inside:avoid; page-break-after:auto">
+					   <td colspan="4" style="border-right:1px solid black;border-top:1px solid black;padding-left:5px;text-align:right;padding:2px;">Cash Total:{{cash}}</td>
 						
 						<td style="border-right:1px solid black;border-top:1px solid black;padding-left:5px;text-align:left">Card Total:{{card}}</td>
 						<td style="border-right:1px solid black;border-top:1px solid black;padding-left:5px;text-align:left">Balance:{{opbalance}}</td>

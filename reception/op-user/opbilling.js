@@ -57,13 +57,11 @@ app.controller('patient_controller', ['$scope', '$http', function ($scope, $http
 		$scope.patient_details={};
 		$scope.patient_add.gender="Male";		
         $scope.add_patients = function() {
-		    console.log($scope.add_patient);
-		    console.log($scope.patient_add);
-		     
+		   
 			      
 				  if(!($scope.add_patient.patient_name.$error.required || $scope.add_patient.patient_age.$error.required || $scope.add_patient.patient_phone.$error.required || $scope.add_patient.patient_address.$error.required))
                     {
-                            console.log("coming here");
+                            
                       		  
 						$http({     
 						                method : 'POST' ,
@@ -124,7 +122,7 @@ app.controller('patient_controller', ['$scope', '$http', function ($scope, $http
 										data:{patient_id: $scope.edit.patient_id}
                         }).success(function(data){
 				               $scope.patient_edit=data;
-							  console.log($scope.patient_edit)
+							  
                 })
                 .error(function() {
                     $scope.data = "error in fetching data";
@@ -138,7 +136,7 @@ app.controller('patient_controller', ['$scope', '$http', function ($scope, $http
 										data: $scope.patient_edit
                         }).success(function(data){
 				              // alert("Updated Successful");
-								console.log(data);		
+										
 											angular.element('#edit_patient').modal('hide');
 							 
                 })
@@ -460,7 +458,7 @@ app.controller('patient_controller', ['$scope', '$http', function ($scope, $http
 										
 								}).success(function(data){
 							           	 $scope.show_service_taken=data;
-										 console.log(data);
+										 
 										 angular.element('#consultation').modal('hide');
 										 var total=0; 
 										

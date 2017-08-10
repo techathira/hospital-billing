@@ -31,7 +31,7 @@ app.controller('doctor_controller', ['$scope', '$http', function ($scope, $http)
 										data: $scope.add_doct
 										
 								}).success(function(data){
-							 
+							            console.log(data);
 										$scope.display_doctor = data;
 										angular.element('#adddoctor').modal('hide');
 							            $scope.add_doct="";

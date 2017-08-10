@@ -84,7 +84,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 								.success(function(data){
 									 
 									$scope.display_details_patient=data;
-									 console.log(data);
+									 
 								})
 								.error(function() {
 									$scope.data = "error in fetching data";
@@ -107,7 +107,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
                 .success(function(data){
 				      
                     $scope.display_advance = data;
-					 console.log(data);
+					 
                 })
                 .error(function() {
                     $scope.data = "error in fetching data";
@@ -216,7 +216,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 							  }).success(function(data,status,headers,config){
 								      
 									  alert("Patient Admited");
-									 console.log(data);
+									 
 									  angular.element('#admitpatient').modal('hide');
 													
 					                                    window.location.reload();
@@ -416,7 +416,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
                         }).success(function(data){
 				              
 							   $scope.display_advance = data;
-							   console.log(data);
+							   
 							    angular.element('#advance').modal('hide'); 
 						})
                 .error(function() {
@@ -764,7 +764,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 								     var total=0; 
 										
 									 $scope.discharge_patient = data;
-									console.log(data);
+									
 									 	for(var i in data){
 											
 										   total = total + parseInt(data[i][4],10);  
@@ -831,7 +831,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 										
 								}).success(function(data){
 			                          	$scope.personal_details=data;
-							          console.log(data);
+							          
 						 
 								}).error(function(data, status) {
 								alert("error");
@@ -845,7 +845,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 										
 								}).success(function(data){
 							             $scope.advance = data;
-										console.log(data);
+										
 												}).error(function(data, status) {
 						                 alert("error");
 					   });
@@ -855,11 +855,11 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 										url: 'dischagre_patient.php',
 										data: $scope.display_patient_details
 							  }).success(function(data,status,headers,config){
-							       console.log(data);
+							       
 								     var total=0; 
 										
 									 $scope.discharge_patient = data;
-									console.log(data);
+									
 									 	for(var i in data){
 											
 										   total = total + parseInt(data[i][4],10);  
@@ -904,7 +904,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 										
 								}).success(function(data){
 			                          	$scope.amount_in_words=data.amount_in_words;
-							            console.log(data);
+							            
 						 
 								}).error(function(data, status) {
 								alert("error");
@@ -921,7 +921,7 @@ app.controller('reception_controller', ['$scope', '$http', function ($scope, $ht
 							             var total=0; 
 										
 										$scope.final_patient_details = data;
-								         console.log(data);
+								         
 									 	for(var i in data){
 											
 										   total += parseInt(data[i][4],10);

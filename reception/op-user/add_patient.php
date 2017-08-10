@@ -23,25 +23,21 @@ else{
 	$email=$data->email;
 	else
 	$email="";
-	
-	
-	
 	$phone=$data->phone;
 	$age=$data->age;
 	$gender=$data->gender;
 	$address=$data->address;
    	$resultdata=array();
-	
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$password = substr( str_shuffle( $chars ), 0, 8 );
 
-   $phonesql="select phone from patient_registration where phone='{$phone}'";
-   $phoneres=mysqli_query($con,$phonesql) or die(mysqli_error($con));
+    $phonesql="select phone from patient_registration where phone='{$phone}'";
+    $phoneres=mysqli_query($con,$phonesql) or die(mysqli_error($con));
   
 	//insert
-	$sql="insert into patient_registration ( patient_name, phone, email, dob, age, gender, address,user_id) values('{$name}','{$phone}','{$email}','{$dob}','{$age}','{$gender}','{$address}','{$user_id}')";
+	$sql="insert into patient_registration ( patient_name, phone, email, dob, age, gender, address,user_id,password) values('{$name}','{$phone}','{$email}','{$dob}','{$age}','{$gender}','{$address}','{$user_id}','{$password}')";
 	$res=mysqli_query($con,$sql) or die(mysqli_error($con));
-	
 
-	
 	//select id	
 	$sql="select patient_id from patient_registration where phone = '{$phone}' ORDER BY patient_id DESC LIMIT 1";
 	$res=mysqli_query($con,$sql) or die(mysqli_error($con));
@@ -49,9 +45,6 @@ else{
 	
 	$actual_id=$row['patient_id'];
 	$id="PATIENT-".$row['patient_id'];
-	
-
-
 	//include "test_barcode.php"; 
 
 	// set Barcode39 object 

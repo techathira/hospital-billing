@@ -1,5 +1,6 @@
 <?php
 require_once("../../database.php");
+$data = json_decode(file_get_contents("php://input"));
 $send=array();
 $advance="select * from advance a,patient_registration pr where a.patient_id=pr.patient_id";
 $res_advance=mysqli_query($con,$advance) or die(mysqli_error($con));
