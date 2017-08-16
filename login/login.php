@@ -9,7 +9,7 @@ $password=$_POST['password'];
 $user_type=$_POST['user_type'];	
 	
 	if($user_type=="patient"){
-	$sql="select * from patient_registration where username='{$username}' and password='{$password}'";
+	$sql="select * from patient_registration where phone='{$username}' and password='{$password}'";
 	$res=mysqli_query($con,$sql) or die(mysqli_error($con));
 		/*$stmt = $con->prepare('select * from patient_registration where phone=? and password=?');	
 		$stmt->bind_param('is', $username,$password);
@@ -30,7 +30,7 @@ $user_type=$_POST['user_type'];
 		}
 	}
 	else if($user_type=="doctor"){
-	$sql="select * from doctors where username='{$username}' and password='{$password}'";
+	$sql="select * from doctors where email='{$username}' and password='{$password}'";
 	$res=mysqli_query($con,$sql) or die(mysqli_error($con));
 		/*$stmt = $con->prepare('select * from doctors where email=? and password=?');	
 		$stmt->bind_param('ss', $username,$password);
