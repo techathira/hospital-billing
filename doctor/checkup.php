@@ -42,26 +42,24 @@
 		
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none">
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-22">Filter</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22">
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20">Name:</div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-20">
+				Username
+			</div>
+		</div>
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none">
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20">prescription:</div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-20">
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
 					  <input type="text"  class="module-input" required=""/>
 				  <span class="bar"></span>
-				  <label class="label-text" >From Date</label>
+				  <label class="label-text" >Enter the prescription</label>
 				  </div>
 				</div>
 			</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22">
-				<div class="group col-md-12 col-sm-12 col-lg-12"> 
-				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
-				  <span class="bar"></span>
-				  <label class="label-text" >To Date</label>
-				  </div>
-				</div>
-			</div>
-			
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20"><i class="glyphicon glyphicon-plus"></i></div>
 		</div>
 		
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
