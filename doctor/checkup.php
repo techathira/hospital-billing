@@ -24,13 +24,20 @@ else{
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="css/style.css" />
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <link rel="stylesheet" href="css/style.css" />
+	 <link rel="stylesheet" href="css/Jquery-ui.css" />
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css" /> 
 	  
+	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script> <!-- for Auto complete -->
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script><!-- for Auto complete -->
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script type="text/javascript" src="../js/angular.min.js"></script>
+	  <script type="text/javascript" src="js/bootstrap-notify.js"></script> <!-- for Notify js -->
+
 </head>
 
-<body>
+<body ng-app="view_appointment" ng-controller="appointmentCtrl">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse">
@@ -44,7 +51,7 @@ else{
       <li><a href="#">Report</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="../login/logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -62,21 +69,21 @@ else{
 		</div>
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16">Prescription:</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16">
+			<div class="col-md-5 col-sm-5 col-lg-5 col-xs-4 font-16">
 				<div class="group col-md-12 col-sm-12 col-lg-12 padding-none"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
+					  <input type="text"  class="module-input" required="" ng-model="drug_name" id="drugname" />
 				  <span class="bar"></span>
 				  <label class="label-text" >EG: Crocin</label>
 				  </div>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20 pointer padding-none"><i class="glyphicon glyphicon-plus"></i></div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20 pointer padding-none" ng-click="add_drug()"><i class="glyphicon glyphicon-plus"></i></div>
 		</div>
 		
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16">Dosage:</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16">
+			<div class="col-md-5 col-sm-5 col-lg-5 col-xs-4 font-16">
 				<div class="group col-md-12 col-sm-12 col-lg-12 padding-none"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
 					  <input type="text"  class="module-input" required=""/>
@@ -182,7 +189,8 @@ else{
  </div><!-- /.container -->
 
 
-
+<!-- SCRIPT -->
+<script type="text/javascript" src="js/appointment/appointment.js"></script>
 
 </body>
 

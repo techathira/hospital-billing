@@ -25,9 +25,12 @@ else{
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <link rel="stylesheet" href="css/style.css" />
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <link rel="stylesheet" href="css/Jquery-ui.css" />
+	  <script src="js/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script type="text/javascript" src="../js/angular.min.js"></script>
+	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	  <script type="text/javascript" src="js/Jquery1-ui.js"></script>
 </head>
 
 <body ng-app="view_appointment" ng-controller="appointmentCtrl">
@@ -44,7 +47,7 @@ else{
       <li><a href="#">Report</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="../login/logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -58,7 +61,7 @@ else{
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22">
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
+					  <input type="text"  class="module-input" required="" datepicker="" ng-model="from_date" />
 				  <span class="bar"></span>
 				  <label class="label-text" >From Date</label>
 				  </div>
@@ -67,7 +70,7 @@ else{
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22">
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
+					  <input type="text"  class="module-input" required="" datepicker="" ng-model="to_date" />
 				  <span class="bar"></span>
 				  <label class="label-text" >To Date</label>
 				  </div>

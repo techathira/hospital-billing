@@ -89,4 +89,10 @@ input:focus ~ label, input[required]:valid ~ label		{
 .border-left{border-left:1px solid #ddd;}
 .border-top-none{border-top:0px;}
 .padding-top-5{padding-top:5% !important;}
+.padding-top-16{padding-top:16px;}
 .padding-16{padding:16px}
+.padding-left-16{padding-left:16px;}
+.phone{width:50%;border:none;outline:none;border-bottom:1px solid #ddd;}
+.phone-edit{cursor:pointer;} .cursor-pointer{cursor:pointer;}
+.padding-right-15{padding-right:15%;}
+.ui-widget-content{padding:8px 4px;}
