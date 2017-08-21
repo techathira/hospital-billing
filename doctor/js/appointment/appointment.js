@@ -2,50 +2,62 @@ var app = angular.module('view_appointment', []);
 
 app.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http) {
 
-	$scope.check_up = function() {
-		window.location.href="checkup.php";
-	};
-	$scope.histroy = function() {
-		window.location.href="histroy.php";
-	};
+	//appointment	list
+	$http.get("include/appointment.php")
+                .success(function(data){
+                    $scope.appointment = data;
+				 //console.log($scope.appointment);
+					
+                })
+                .error(function() {
+                    $scope.data = "error in fetching data";
+                });
+				
+
 	
-	$scope.add_drug=function(){
+	$scope.check_up=function(patient_id,appointment_id){
 		  $http({     
 							method : 'POST' ,
-							url: 'include/add_drug.php',
-							data:{drug_name:$scope.drug_name}
+							url: 'include/patient_details.php',
+							data:{patient_id:patient_id,appointment_id:appointment_id}
 							
 					}).success(function(data){
-					if(data==1) {
-							  $.notify({
-									message: 'New drug added Successfully',	
-							},{
-								placement: {
-									from: "top",
-									align: "center"
-								},
-								type: 'info'
-							});
-						}
-					else
-						console.log(data);
+						//console.log(data);
+						window.location.href="checkup.php";
 				   }).error(function(data, status) {
 							 alert("error");
 		   });  
 	};
 	
-	$(function() {
-      $("#drugname" ).autocomplete({
-      source: 'drug_details.php',
-	  select: function( event, ui ) {
-	    
-            var drug_name = ui.item.value;
-			$scope.drug_name=drug_name;
-			//$scope.display_patient_details();
-		 }	 
-	  
-    });
-  });
+	//Histroy
+	$scope.histroy = function(patient_id,appointment_id) {
+		//window.location.href="histroy.php";
+		$http({     
+					method : 'POST' ,
+					url: 'include/check_history.php',
+					data:{patient_id:patient_id,appointment_id:appointment_id}
+							
+					}).success(function(data){
+						//console.log(data);
+						if(data=="0") {
+							  $.notify({
+									message: 'There is no record for the Perticular patient',	
+							},{
+								placement: {
+									from: "top",
+									align: "center"
+								},
+								type: 'danger'
+							});
+							
+						}
+					else
+						window.location.href="histroy.php";
+						
+				   }).error(function(data, status) {
+							 alert("error");
+		   });
+	};
 
 }]);
 

@@ -96,3 +96,5 @@ input:focus ~ label, input[required]:valid ~ label		{
 .phone-edit{cursor:pointer;} .cursor-pointer{cursor:pointer;}
 .padding-right-15{padding-right:15%;}
 .ui-widget-content{padding:8px 4px;}
+.uppercase{text-transform: uppercase;}
+.margin-top-10-less{margin-top:-10px;}

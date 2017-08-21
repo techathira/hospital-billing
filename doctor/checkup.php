@@ -37,7 +37,7 @@ else{
 
 </head>
 
-<body ng-app="view_appointment" ng-controller="appointmentCtrl">
+<body ng-app="checkup" ng-controller="checkupCtrl" ng-cloak>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse">
@@ -62,17 +62,18 @@ else{
 		
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20">Name:</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-20">
-				Rahul Patel S G
-			</div>
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 font-20 font-grey">Appointment Id: <span class="uppercase">{{appointment_id}}</span></div>
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 font-20 font-grey">Name: <span class="uppercase">{{patient_details.patient_name}}</span></div>
+			
 		</div>
+		<form ng-submit="add_prescription()" name="add">
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16">Prescription:</div>
 			<div class="col-md-5 col-sm-5 col-lg-5 col-xs-4 font-16">
 				<div class="group col-md-12 col-sm-12 col-lg-12 padding-none"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required="" ng-model="drug_name" id="drugname" />
+					  <input type="text"  class="module-input" required="" ng-model="prescription.drug_name" id="drugname" />
+					  <input type="hidden"  class="module-input" required="" ng-model="prescription.drug_id" id="drugid" />
 				  <span class="bar"></span>
 				  <label class="label-text" >EG: Crocin</label>
 				  </div>
@@ -86,7 +87,7 @@ else{
 			<div class="col-md-5 col-sm-5 col-lg-5 col-xs-4 font-16">
 				<div class="group col-md-12 col-sm-12 col-lg-12 padding-none"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
+					  <input type="text"  class="module-input" required="" ng-model="prescription.dosage" />
 				  <span class="bar"></span>
 				  <label class="label-text" >EG: 10 tablet / 50 ML</label>
 				  </div>
@@ -112,12 +113,12 @@ else{
 						<td>After Food</td>
 					</tr>
 					<tr class="text-center">
-						<td><input type="checkbox" name="" id="" /></td>
-						<td><input type="checkbox" name="" id="" /></td>
-						<td><input type="checkbox" name="" id="" /></td>
-						<td><input type="checkbox" name="" id="" /></td>
-						<td><input type="checkbox" name="" id="" /></td>
-						<td><input type="checkbox" name="" id="" /></td>
+						<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="prescription.mbf"/></td>
+						<td><input type="checkbox" name="maf" id="" value="maf" ng-model="prescription.maf" /></td>
+						<td><input type="checkbox" name="abf" id="" value="abf" ng-model="prescription.abf" /></td>
+						<td><input type="checkbox" name="aaf" id="" value="aaf" ng-model="prescription.aaf" /></td>
+						<td><input type="checkbox" name="nbf" id="" value="nbf" ng-model="prescription.nbf" /></td>
+						<td><input type="checkbox" name="naf" id="" value="naf" ng-model="prescription.naf" /></td>
 						
 					</tr>
 				</table>
@@ -126,13 +127,13 @@ else{
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20">&nbsp;</div>
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16">
-				<input type="button" value="ADD" class="btn btn-primary" />
+				<input type="submit" value="ADD" class="btn btn-primary" />
 			</div>
 		</div>
-		
+		</form>
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
 
-	<div class="col-md-8 col-sm-8 col-lg-12 col-xs-12 table-responsive">
+	<div class="col-md-8 col-sm-8 col-lg-12 col-xs-12 table-responsive" ng-show="prescription_table">
 		<table class="table table-border text-center">
 			<tr >
 				<th rowspan="3" class="text-center padding-top-5">Drug Name</th>
@@ -156,31 +157,26 @@ else{
 				<th class="text-center"> AF</th>
 			</tr>
 			
-         <tr>
-			<td>Crosin</td>
-			<td>10</td>
-			<td>yes</td>
-			<td></td>
-			<td></td>
-			<td>yes</td>
-			<td></td>
-			<td></td>
-            <td>Edit</td>
-			<td>Delete</td>
+         <tr ng-repeat="display in temp">
+			<td>{{display.drug_name}}</td>
+			<td>{{display.dosage}}</td>
+			<td>{{display.mbf==true ? 'yes' : ''}}</td>
+			<td>{{display.maf==true ? 'yes' : ' '}}</td>
+			<td>{{display.abf==true ? 'yes' : ' '}}</td>
+			<td>{{display.aaf==true ? 'yes' : ' '}}</td>
+			<td>{{display.nbf==true ? 'yes' : ' '}}</td>
+			<td>{{display.naf==true ? 'yes' : ' '}}</td>
+            <td ng-click="edit_prescription($index)" ><span class="cursor-pointer" data-toggle="modal" data-target="#edit_prescription">Edit</span></td>
+			<td ng-click="delete_prescription(display.drug_name)"><span class="cursor-pointer">Delete </span></td>
 		</tr>
-		  <tr>
-			<td>Crosin</td>
-			<td>10</td>
-			<td>yes</td>
-			<td></td>
-			<td></td>
-			<td>yes</td>
-			<td></td>
-			<td></td>
-            <td>Edit</td>
-			<td>Delete</td>
-		</tr>
+		  
 	</table>
+	<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-20">&nbsp;</div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 pull-right">
+				<input type="button" value="PRESCRIBE" class="btn btn-primary" ng-click="submit_prescription()"/>
+			</div>
+		</div>
 	</div>
 		
 		
@@ -188,9 +184,77 @@ else{
 <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
  </div><!-- /.container -->
 
+ 
+ <!-- Modal -->
+
+
+<!--Change password Modal -->
+<div id="edit_prescription" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit {{editpres.drug_name}}</h4>
+      </div>
+      <div class="col-md-12 col-sm-12 col-lg-12 col-xs-1 modal-body">
+	  <form class="form-horizontal"   ng-submit="change_prescription()"  >
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
+        <div class="col-md-3 col-sm-3 col-lg-3 col-xs-6 padding-none font-16 padding-top-16">Dosage</div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding-none font-16">
+			<div class="group col-md-12 col-sm-12 col-lg-12 padding-none"> 
+				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
+					  <input type="text"  class="module-input" ng-model="editpres.dosage" required=""  />
+				  <span class="bar"></span>
+				  <label class="label-text" >Dosage</label>
+				  </div>
+				</div>
+		</div>
+		</div>
+		
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom table-responsive">
+		<table class="table table-border text-center">
+		<tr>
+				<th colspan="2" class="text-center">Morning</th>
+				<th colspan="2" class="text-center">Afternoon</th>
+				<th colspan="2" class="text-center">Night</th>
+				
+			</tr>
+			<tr>
+				<th class="text-center">BF</th>
+				<th class="text-center">AF</th>
+				<th class="text-center">BF</th>
+				<th class="text-center">AF</th>
+                <th class="text-center">BF</th>
+				<th class="text-center"> AF</th>
+			</tr>
+			
+         <tr>
+			<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="editpres.mbf"/></td>
+			<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="editpres.maf"/></td>
+			<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="editpres.abf"/></td>
+			<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="editpres.aaf"/></td>
+			<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="editpres.nbf"/></td>
+			<td><input type="checkbox" name="mbf" id="" value="mbf" ng-model="editpres.naf"/></td>
+		</tr>
+		  </table>
+		</div>
+				
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Change</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+	  </form>
+    </div>
+
+  </div>
+</div>
+ 
 
 <!-- SCRIPT -->
-<script type="text/javascript" src="js/appointment/appointment.js"></script>
+<script type="text/javascript" src="js/checkup/checkup.js"></script>
 
 </body>
 

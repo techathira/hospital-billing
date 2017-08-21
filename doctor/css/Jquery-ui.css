@@ -953,7 +953,7 @@ a:visited.ui-button,
 .ui-button:hover,
 .ui-button:focus {
 	font-weight: bold;
-	font-size:16px;
+	
 	color: #64ceea;
 }
 .ui-state-hover a,

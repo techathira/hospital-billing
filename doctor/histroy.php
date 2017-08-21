@@ -32,7 +32,7 @@ else{
 	  <script type="text/javascript" src="js/Jquery1-ui.js"></script>
 </head>
 
-<body ng-app="view_appointment" ng-controller="appointmentCtrl">
+<body ng-app="view_histroy" ng-controller="histroyCtrl">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse">
@@ -58,7 +58,7 @@ else{
 		
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom font-grey">
 		<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-18">Name:</div>
-		<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-18 padding-none">Rahul Patel</div>
+		<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-18 padding-none">{{patient_name}}</div>
 		<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-18">Age:</div>
 		<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-18 padding-none ">25</div>
 		<div class="col-md-6 col-sm-6 col-lg-6 col-xs-4 font-18 padding-none "><p class="text-right padding-right-15 font-green "  ><span ng-click="check_up()" class="pointer">Check Up</span></p> </div>
@@ -96,12 +96,12 @@ else{
 			<div class="col-md-2 col-sm-4 col-lg-4 col-xs-4 font-16 padding-none">Reason</div>
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">&nbsp;</div>
 		</div>
-		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom">
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom" ng-repeat="display in patient_info">
 			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">1</div>
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">16-Aug-2017</div>
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">Rahul patel</div>
-			<div class="col-md-2 col-sm-4 col-lg-4 col-xs-4 font-16 padding-none">Head ache since 2 days </div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none"><span ng-click="prescription()" class="pointer font-blue" data-toggle="modal" data-target="#prescription">View prescription</span> </div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">{{display.date}}</div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">{{display.doctor_name}}</div>
+			<div class="col-md-2 col-sm-4 col-lg-4 col-xs-4 font-16 padding-none">{{display.reason}}</div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none"><span ng-click="prescription(display.appointment_id,display.date)" class="pointer font-blue" data-toggle="modal" data-target="#prescription">View prescription</span> </div>
 		</div>
 
 
@@ -113,27 +113,51 @@ else{
 
 <!--Change password Modal -->
 <div id="prescription" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width:67%;">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Prescription for date 16-Aug-2017</h4>
+        <h4 class="modal-title">Prescription for date {{fordate}}</h4>
       </div>
       <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 modal-body">
       <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 table-responsive">
 
-		<table class="table table-border">
-			<tr>
-				<th>Drug Name</th>
-				<th>Dosage</th>
+				<table class="table table-border text-center">
+			<tr >
+				<th rowspan="3" class="text-center padding-top-5">Drug Name</th>
+				<th rowspan="3" class="text-center padding-top-5">Dosage</th>
+				<th colspan="6" class="text-center">Timing</th>
 			</tr>
 			<tr>
-				<td>Crosin</td>
-				<td>10</td>
+				<th colspan="2" class="text-center">Morning</th>
+				<th colspan="2" class="text-center">Afternoon</th>
+				<th colspan="2" class="text-center">Night</th>
+				
 			</tr>
-		</table>
+			<tr>
+				<th class="text-center">BF</th>
+				<th class="text-center">AF</th>
+				<th class="text-center">BF</th>
+				<th class="text-center">AF</th>
+                <th class="text-center">BF</th>
+				<th class="text-center"> AF</th>
+			</tr>
+			
+         <tr ng-repeat="display_drug in drugs">
+			<td>{{display_drug.drug_name}}</td>
+			<td>{{display_drug.dosage}}</td>
+			<td>{{display_drug.mbf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.maf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.abf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.aaf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.nbf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.naf=="1" ? 'yes' : ''}}</td>
+
+		</tr>
+		  
+	</table>
 		</div>
 
       </div>
@@ -148,7 +172,7 @@ else{
 
 	
 <!-- SCRIPT -->
-<script type="text/javascript" src="js/appointment/appointment.js"></script>
+<script type="text/javascript" src="js/histroy/histroy.js"></script>
 </body>
 
 </html>

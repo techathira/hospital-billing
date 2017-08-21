@@ -12,7 +12,8 @@ $db = new mysqli($dbHost,$dbUsername,$dbPassword,$dbName);
 	
 	while ($row = $sql->fetch_assoc()) {
 
-    $data[] = $row['name'];
+    $data[] = $row['name'].':'.$row['drug_id'];
+    
 	if(sizeof($data)>8)
 		break;		
 }

@@ -34,7 +34,7 @@ else{
 
 </head>
 
-<body ng-app="doctor_profile" ng-controller="profileCtrl" ng-clock>
+<body ng-app="doctor_profile" ng-controller="profileCtrl" ng-cloak>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse">
