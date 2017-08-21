@@ -25,26 +25,32 @@ else{
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <link rel="stylesheet" href="css/style.css" />
+	  <link rel="stylesheet" href="css/Jquery-ui.css" />
+	  
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  
+	  <script type="text/javascript" src="../js/angular.min.js"></script>
+	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	  <script type="text/javascript" src="js/Jquery1-ui.js"></script>
+	  <script type="text/javascript" src="js/bootstrap-notify.js"></script> <!-- for Notify js -->
+
 </head>
 
-<body>
+<body ng-app="view_appointment" ng-controller="appointmentCtrl" ng-cloak >
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Hospital Billing</a>
+      <a class="navbar-brand" href="index.php">Hospital Billing</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">View Appointment</a></li>
-      <li><a href="#">Profile</a></li>
+      <li class="active"><a href="index.php">View Appointment</a></li>
+      <li><a href="profile.php">Profile</a></li>
       <li><a href="#">Report</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="../login/logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -54,29 +60,39 @@ else{
 		
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none">
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-22">Filter</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22">
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-22">Search by date</div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-22 padding-none margin-top-10-less">
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
+					  <input type="text"  class="module-input" required="" datepicker="" ng-model="from_date" />
 				  <span class="bar"></span>
 				  <label class="label-text" >From Date</label>
 				  </div>
 				</div>
 			</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22">
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-22 padding-none margin-top-10-less">
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required=""/>
+					  <input type="text"  class="module-input" required="" datepicker="" ng-model="to_date" />
 				  <span class="bar"></span>
 				  <label class="label-text" >To Date</label>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-22">Search by patient </div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-22 padding-none margin-top-10-less">
+				<div class="group col-md-12 col-sm-12 col-lg-12"> 
+				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
+					  <input type="text"  class="module-input" required=""  ng-model="patient_search" />
+				  <span class="bar"></span>
+				  <label class="label-text" >Patient Name</label>
 				  </div>
 				</div>
 			</div>
 			
 		</div>
 		
-		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">&nbsp;</div>
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom">&nbsp;</div>
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom">
 			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">Sl No</div>
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">Patient Name</div>
@@ -85,13 +101,13 @@ else{
 			<div class="col-md-2 col-sm-4 col-lg-4 col-xs-4 font-16 padding-none">Reason</div>
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">&nbsp;</div>
 		</div>
-		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom">
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">Sl No</div>
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">Patient Name</div>
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">Date</div>
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">Time</div>
-			<div class="col-md-2 col-sm-4 col-lg-4 col-xs-4 font-16 padding-none">Reason</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">Check Up &nbsp; Histroy</div>
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom" ng-repeat="appointment_details in appointment | filter:patient_search">
+			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">1</div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none uppercase">{{appointment_details.patient_name}}</div>
+			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">{{appointment_details.date}}</div>
+			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">{{appointment_details.time}}</div>
+			<div class="col-md-2 col-sm-4 col-lg-4 col-xs-4 font-16 padding-none">{{appointment_details.reason}}</div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none"><span ng-click="check_up(appointment_details.patient_id,appointment_details.appointment_id)" class="pointer">Check Up</span> &nbsp;&nbsp;&nbsp; <span class="pointer" ng-click="histroy(appointment_details.patient_id,appointment_details.appointment_id)">Histroy</span></div>
 		</div>
 
 
@@ -100,6 +116,9 @@ else{
 
 
 
+
+<!-- SCRIPT -->
+<script type="text/javascript" src="js/appointment/appointment.js"></script>
 
 </body>
 
