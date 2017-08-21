@@ -41,7 +41,8 @@ $user_type=$_POST['user_type'];
 			$row=mysqli_fetch_array($res);
 			$_SESSION['name']="doctor";
 			$_SESSION['user_id']=$row['doctor_id'];
-			header('Location: ../doctor/index.php');
+			$_SESSION['doctor_name']=$row['doctor_name'];
+			header('Location: ../doctor/files/appointment.php');
 			exit();
 		}
 		else {
