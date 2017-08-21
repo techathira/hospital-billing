@@ -33,3 +33,28 @@ app.directive('datepicker', function() {
     }
   };
 });
+
+
+app.directive('oldPassword', function($http) {
+  var runing;
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function(scope, elem, attr, ctrl) { 
+     
+      scope.$watch(attr.ngModel, function(value) {
+
+       
+           if(runing) clearTimeout(runing);
+
+     
+           runing = setTimeout(function(){
+            $http.get('includes/validate.php?oldpassword=' + value).success(function(data) {
+                console.log(data);
+                ctrl.$setValidity('oldPassword', data.isValid);
+            });
+        }, 200);
+      })
+    }
+  }
+});

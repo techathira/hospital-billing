@@ -115,6 +115,34 @@ app.controller('profile_controller', ['$scope', '$http','$window','fileUpload', 
 				}
     });
 }
+
+$scope.password={};
+$scope.change_password = function() {
+		  $http({     
+							method : 'POST' ,
+							url: 'includes/change_password.php',
+							data:$scope.password
+							
+					}).success(function(data){
+					if(data==1) {
+						angular.element('#change_password').modal('hide');
+							  $.notify({
+									message: 'Password Changed Successfully',	
+							},{
+								placement: {
+									from: "top",
+									align: "center"
+								},
+								type: 'success'
+							});
+						$scope.password="";
+						}
+					else
+						console.log(data);
+				   }).error(function(data, status) {
+							 alert("error");
+		   });  
+    };
 			
      
 }]);

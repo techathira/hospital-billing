@@ -206,7 +206,7 @@ else{
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
                                     <thead>
-                                        <th>Sl No</th>
+                                        <th>Reference No</th>
                                         <th>Doctor Name</th>
                                         <th>Date</th>
                                         <th>Reason</th>
@@ -214,12 +214,12 @@ else{
                                     </thead>
                                     <tbody>
                                     <!--ng-repeat="doctor in display_doctor | filter:searchbox" -->
-                                        <tr>
-                                            <td>1</td>
-                                            <td>sada</td>
-                                            <td>12-19-2345</td>
-                                            <td>asdsad</td>
-                                            <td><button type="button" ng-click="check_prescription()" class="btn btn-success">Show Prescription</button></td>
+                                        <tr ng-repeat="each_pre in prescription_history">
+                                            <td>{{each_pre.appointment_id}}</td>
+                                            <td>{{each_pre.doctor_name}}</td>
+                                            <td>{{each_pre.date}}</td>
+                                            <td>{{each_pre.reason}}</td>
+                                            <td><button type="button" ng-click="check_prescription(each_pre.appointment_id)" class="btn btn-success">Show Prescription</button></td>
                                         </tr>
 
 
@@ -256,7 +256,7 @@ else{
       <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Slots Available</h4>
+                      <h4 class="modal-title"> <h4 class="modal-title">Prescription for date {{fordate}}</h4></h4>
                     </div>
                     <div class="modal-body">
 
@@ -266,69 +266,45 @@ else{
                     <div class="col-md-8 col-md-offset-2">
                         <div class="card">
                             <div class="header text-center">
-                                <h3 class="title">Paper Dashboard</h3>
-                                <p class="category">Are you looking for more components? Please check our Premium Version of Paper Dashboard Pro.</p>
-                                <br>
+<!--                                 <h3 class="title">Paper Dashboard</h3>
+                              <p class="category">Are you looking for more components? Please check our Premium Version of Paper Dashboard Pro.</p>
+                                 -->                              <br>
                             </div>
                             <div class="content table-responsive table-full-width table-upgrade">
-                                <table class="table">
-                                    <thead>
-                                        <th></th>
-                                        <th class="text-center">Free</th>
-                                        <th class="text-center">PRO</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Components</td>
-                                            <td>16</td>
-                                            <td>160</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Plugins</td>
-                                            <td>4</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Example Pages</td>
-                                            <td>4</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Documentation</td>
-                                            <td><i class="fa fa-times text-danger"></i></td>
-                                            <td><i class="fa fa-check text-success"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>SASS Files</td>
-                                            <td><i class="fa fa-check text-success"></i></td>
-                                            <td><i class="fa fa-check text-success"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Login/Register/Lock Pages</td>
-                                            <td><i class="fa fa-times text-danger"></i></td>
-                                            <td><i class="fa fa-check text-success"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Premium Support</td>
-                                            <td><i class="fa fa-times text-danger"></i></td>
-                                            <td><i class="fa fa-check text-success"></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>Free</td>
-                                            <td>Just $39</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <a href="#" class="btn btn-round btn-fill btn-default disabled">Current Version</a>
-                                            </td>
-                                            <td>
-                                                <a target="_blank" href="http://www.creative-tim.com/product/paper-dashboard-pro/?ref=pdfree-upgrade-archive" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <table class="table table-border text-center">
+            <tr >
+                <th rowspan="3" class="text-center padding-top-5">Drug Name</th>
+                <th rowspan="3" class="text-center padding-top-5">Dosage</th>
+                <th colspan="6" class="text-center">Timing</th>
+            </tr>
+            <tr>
+                <th colspan="2" class="text-center">Morning</th>
+                <th colspan="2" class="text-center">Afternoon</th>
+                <th colspan="2" class="text-center">Night</th>
+                
+            </tr>
+            <tr>
+                <th class="text-center">BF</th>
+                <th class="text-center">AF</th>
+                <th class="text-center">BF</th>
+                <th class="text-center">AF</th>
+                <th class="text-center">BF</th>
+                <th class="text-center"> AF</th>
+            </tr>
+            
+         <tr ng-repeat="display_drug in drugs">
+            <td>{{display_drug.drug_name}}</td>
+            <td>{{display_drug.dosage}}</td>
+            <td>{{display_drug.mbf=="1" ? '&#x2714;' : '&#x2716;'}}</td>
+            <td>{{display_drug.maf=="1" ? '&#x2714;' : '&#x2716;'}}</td>
+            <td>{{display_drug.abf=="1" ? '&#x2714;' : '&#x2716;'}}</td>
+            <td>{{display_drug.aaf=="1" ? '&#x2714;' : '&#x2716;'}}</td>
+            <td>{{display_drug.nbf=="1" ? '&#x2714;' : '&#x2716;'}}</td>
+            <td>{{display_drug.naf=="1" ? '&#x2714;' : '&#x2716;'}}</td>
+
+        </tr>
+          
+    </table>
                             </div>
                         </div>
                     </div>
@@ -336,12 +312,6 @@ else{
             </div>
         </div>
 
-                      
-                    </div>
-                    </div>
-        </div>
-    </div>
-     
         <div class="modal-footer">
           
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

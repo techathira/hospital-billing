@@ -159,7 +159,7 @@ else{
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a  href="../login/logout.php">logout</a></li>
-                                <li><a href="#">Change Password</a></li>
+                                <li><a data-toggle="modal" data-target="#change_password">Change Password</a></li>
                               </ul>
                         </li>
 					
@@ -340,15 +340,95 @@ But that's the difference in our opinions.</textarea>
     </div>
 </div>
 
+<!-- Modal -->
+<div id="change_password" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-</body>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
 
-     <!-- Angular Stuff -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="card" style="box-shadow:none;">
+                            <div class="header text-center">
+                                <h3 class="title">Change Password</h3>
+                                <p class="category"></p>
+                                <br>
+                            </div>
+                             <form class="form-horizontal" name="changepassword"  ng-submit="change_password()" >
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Enter Old Password</label>
+                                                 <input type="password" name="oldpassword"  class="form-control border-input" ng-model="password.old"  required old-password />
+                                                 <span ng-show="changepassword.oldpassword.$error.oldPassword">Old Password is Incorrect</span>
+
+                                            </div>
+                                        </div>
+                                     </div>
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Enter New Paasword</label>
+                                                <input type="password" class="form-control border-input"  ng-model="password.newpassword" required />
+                                            </div>
+                                        </div>
+                                      </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Re-enter New Password</label>
+                                                 <input type="password" class="form-control border-input"  ng-model="password.reenter" ng-match="password.newpassword" required   />
+                                                  <span class="font-red font-12" ng-show="password.newpassword != password.reenter">Confirm Password should match with New Password</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" ng-disabled="password.newpassword != password.reenter" class="btn btn-info btn-fill btn-wd">Update</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+      </div>
+    
+    </div>
+
+  </div>
+</div>
+        
+
+    <!-- Modal enfd here -->
+  <!-- Angular Stuff -->
     
      <script src="js/controllers/patient-profile.js"  type="text/javascript"></script>
        <script src="js/directives/custom-directives.js" type="text/javascript"></script>
        <script src="js/services/profile-services.js" type="text/javascript"></script>
 
    <!-- Angular Stuff End here -->
-    
+    <!--  Chage password Link -->
+
+
+</body>
+
+   
+
+
+
+
 </html>
