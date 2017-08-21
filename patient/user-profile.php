@@ -184,15 +184,16 @@ else{
                                      
                                         <div class="image-container">
                                                  <img class="avatar border-white profile-pic" ng-src="{{patient_details.personal.profile_pic}}" alt="..."/>
-                                                   <div class="after"><i ng-click="uploadfile()" class="ti-upload" ></i>
+                                                   <div class="after"><center><div style="    margin-top: 3em;" ng-click="uploadfile()" class="ti-upload" ></div></center>
                                                    </div>
-                                                   <div ng-show="display_save">
-                                                        <button ng-click="uploadFile()">save me</button>
+                                                   <div >
+                                                        <button ng-show="show_save_btn" ng-click="uploadFile()">save me</button>
+                                                        {{myFile.name}}
                                                    </div>
                                         </div>
                                   <!-- Hidden file button -->
-                                         <div class="form-group" > 
-                                        <input type="file" name="file"  id="upload"  file-model="myFile">
+                                         <div class="form-group" style="display:none;" > 
+                                        <input type="file" name="file"  id="upload"  file-model="myFile" >
                                         </div>
                                           
                               

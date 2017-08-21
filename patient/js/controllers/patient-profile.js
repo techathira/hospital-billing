@@ -74,7 +74,7 @@ app.controller('profile_controller', ['$scope', '$http','$window','fileUpload', 
 		};
 
 
-	$scope.display_save=false;
+	$scope.show_save_btn=false;
    
 	$scope.uploadfile=function(){
 		 angular.element('#upload').trigger('click');
@@ -83,17 +83,31 @@ app.controller('profile_controller', ['$scope', '$http','$window','fileUpload', 
 
 	$scope.show_save_btn=function(){
 
-         //console.log($scope.myFile);
+         $scope.show_save_btn=true;
 
 	}
-
+ 
 	$scope.uploadFile = function(){
         var file = $scope.myFile;
-        
+        if(!file){	
+
+        			$.notify({
+									message: 'Please Choose the file',	
+							},{
+								placement: {
+									from: "top",
+									align: "center"
+								},
+								type: 'danger',
+								timer: 100
+							});
+        	}else{
+
+
         var uploadUrl = "includes/upload-profile-pic.php";
         fileUpload.uploadFileToUrl(file, uploadUrl).then(function(data,status) {
 				//if suceess of updating profile pic
-				console.log(data);
+			
 				if(data.data.status_code == 200){
 					console.log("pass");
 					 $scope.patient_details.personal.profile_pic=data.data.updated_src;
@@ -109,11 +123,19 @@ app.controller('profile_controller', ['$scope', '$http','$window','fileUpload', 
 					
 					 $.notify({icon: 'ti-close',message: "failed to update! please check the size and format of image"
 									},{
+										placement: {
+									from: "top",
+									align: "center"
+								},
                 						type: 'danger',
                 						timer: 400
             		});
 				}
     });
+
+
+        	}
+
 }
 
 $scope.password={};

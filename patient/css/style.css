@@ -4,12 +4,12 @@
 }
 .image-container .after  {
     position: absolute;
-    top: 2em;
-    left: 10em;
+    top: 0em;
+    left: 8em;
     display: none;
     color: #FFF;
-    height:100px;
-    width:100px;
+    height: 100px;
+    width: 100px;
   
 }
 .image-container:hover .after {

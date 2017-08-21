@@ -30,7 +30,7 @@ if(isset($_FILES['file'])){
             if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {//if file moved to uploads folder
             	$file_target="$display_src/$unique_file_name";
                 
-                $sql2="update patient_registration set profile_pic='{$file_target}' where patient_id='{$user_id}'";
+                $sql2="update patient_registration set photo='{$file_target}' where patient_id='{$user_id}'";
 				$res2=mysqli_query($con,$sql2) or die(mysqli_error($con));
 				if($res2){
 
