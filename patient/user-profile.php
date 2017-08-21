@@ -1,9 +1,24 @@
+
+   <?php
+session_start();
+if(isset($_SESSION['name']) && $_SESSION['name']=='patient') {
+
+}
+else{
+    header('Location: ../login/index.html');
+    die();  
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="
+    img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="
+    img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>User Dashboard by Hospital Name</title>
@@ -13,24 +28,46 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="css/animate.min.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="css/paper-dashboard.css" rel="stylesheet"/>
+    
+    <link href="css/style.css" rel="stylesheet"/>
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <link href="css/themify-icons.css" rel="stylesheet">
+
+
+
+     <!--   Core JS Files   -->
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+     <script src="js/angular.min.js"></script>
+
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="js/bootstrap-checkbox-radio.js"></script>
+
+    <!--  Charts Plugin -->
+    <script src="js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyATUxnXEYwOrIyMOJ8c5Q0rLl8upLH--LQ"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+    <script src="js/paper-dashboard.js"></script>
+
 
 </head>
-<body>
+<body ng-app="book-appointment" ng-controller="profile_controller">
 
 <div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
@@ -50,7 +87,7 @@
             <ul class="nav">
                 
                 <li>
-                    <a href="book-doctor.php">
+                    <a href="index.php">
                         <i class="ti-view-list-alt"></i>
                         <p>Book a Doctor</p>
                     </a>
@@ -121,7 +158,7 @@
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">logout</a></li>
+                                <li><a  href="../login/logout.php">logout</a></li>
                                 <li><a href="#">Change Password</a></li>
                               </ul>
                         </li>
@@ -133,19 +170,34 @@
         </nav>
 
 
-        <div class="content">
+        <div class="content" ng-Cloak>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-md-5">
                         <div class="card card-user">
                             <div class="image">
-                                <img src="assets/img/background.jpg" alt="..."/>
+                                <img src="img/background.jpg" alt="..."/>
                             </div>
                             <div class="content">
+                          
                                 <div class="author">
-                                  <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
-                                  <h4 class="title">Chet Faker<br />
-                                     <a href="#"><small>@chetfaker</small></a>
+                                     
+                                        <div class="image-container">
+                                                 <img class="avatar border-white profile-pic" ng-src="{{patient_details.personal.profile_pic}}" alt="..."/>
+                                                   <div class="after"><i ng-click="uploadfile()" class="ti-upload" ></i>
+                                                   </div>
+                                                   <div ng-show="display_save">
+                                                        <button ng-click="uploadFile()">save me</button>
+                                                   </div>
+                                        </div>
+                                  <!-- Hidden file button -->
+                                         <div class="form-group" > 
+                                        <input type="file" name="file"  id="upload"  file-model="myFile">
+                                        </div>
+                                          
+                              
+                                  <h4 class="title">{{patient_details.personal.patient_name}}<br />
+                                     <a href="#"><small>{{patient_details.personal.email}}</small></a>
                                   </h4>
                                 </div>
                             
@@ -171,60 +223,26 @@
                             </div>
                             <div class="content">
                                 <ul class="list-unstyled team-members">
-                                            <li>
+                                            <li ng-repeat="each_asso in patient_details.associated ">
                                                 <div class="row">
                                                     <div class="col-xs-3">
                                                         <div class="avatar">
-                                                            <img src="assets/img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                            <img src="
+                                                            img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        DJ Khaled
+                                                        {{each_asso.patient_name}}
                                                         <br />
                                                         <span class="text-muted"><small>Offline</small></span>
                                                     </div>
 
                                                     <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
+                                                        <btn class="btn btn-sm btn-success btn-icon" ng-click="switch_profile(each_asso.patient_id)"><i class="fa ti-angle-double-right"></i></btn>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Creative Tim
-                                                        <br />
-                                                        <span class="text-success"><small>Available</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Flume
-                                                        <br />
-                                                        <span class="text-danger"><small>Busy</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                        
                                         </ul>
                             </div>
                         </div>
@@ -235,71 +253,53 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form name="update_profile" ng-submit="update_profile_details()">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Phone No</label>
-                                                <input type="text" class="form-control border-input" disabled placeholder="phone" value="7411848429">
+                                                <input type="text" class="form-control border-input" disabled placeholder="phone" ng-model="patient_details.personal.phone">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" class="form-control border-input" placeholder="Username" value="michael23">
+                                                <input type="text" class="form-control border-input" placeholder="Username" ng-model="patient_details.personal.patient_name">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control border-input" placeholder="Email">
+                                                <input type="email" class="form-control border-input" ng-model="patient_details.personal.email">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company" value="Chet">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="Faker">
-                                            </div>
-                                        </div>
-                                    </div>
+                                 
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input type="text" class="form-control border-input" placeholder="Home Address" value="Melbourne, Australia">
+                                                <input type="text" class="form-control border-input" placeholder="Home Address" ng-model="patient_details.personal.address">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                   <div class="row">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control border-input" placeholder="City" value="Melbourne">
+                                                <label>Age</label>
+                                                <input type="text" class="form-control border-input" placeholder="City" disabled value="Melbourne">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Country</label>
-                                                <input type="text" class="form-control border-input" placeholder="Country" value="Australia">
+                                                <label>DOB</label>
+                                                <input type="text" class="form-control border-input" placeholder="Country" disabled value="Australia">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Postal Code</label>
-                                                <input type="number" class="form-control border-input" placeholder="ZIP Code">
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="row">
@@ -343,26 +343,12 @@ But that's the difference in our opinions.</textarea>
 
 </body>
 
-    <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+     <!-- Angular Stuff -->
+    
+     <script src="js/controllers/patient-profile.js"  type="text/javascript"></script>
+       <script src="js/directives/custom-directives.js" type="text/javascript"></script>
+       <script src="js/services/profile-services.js" type="text/javascript"></script>
 
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
-
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="assets/js/paper-dashboard.js"></script>
-
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
-
+   <!-- Angular Stuff End here -->
+    
 </html>

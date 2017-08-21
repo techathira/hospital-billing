@@ -1,17 +1,19 @@
 
-   <?php
-session_start();
-if(isset($_SESSION['name']) && $_SESSION['name']=='patient') {
+<?php
+		session_start();
+		if(isset($_SESSION['name']) && $_SESSION['name']=='patient') {
 
-}
-else{
-    header('Location: ../login/index.html');
-    die();  
-}
+
+		     $doctor_id=$_GET['doctor_id'];
+
+
+		}
+		else{
+		    header('Location: ../login/index.html');
+		    die();  
+		}
 
 ?>
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,10 +22,9 @@ else{
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Paper Dashboard by Creative Tim</title>
+	<title>Athira Hospital Management</title>
 
-	
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
 
@@ -35,23 +36,20 @@ else{
 
     <!--  Paper Dashboard core CSS    -->
     <link href="css/paper-dashboard.css" rel="stylesheet"/>
-     <link href="css/style.css" rel="stylesheet"/>
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
    
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="css/themify-icons.css" rel="stylesheet">
-   
-
-
 
      <!--   Core JS Files   -->
     <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
      <script src="js/angular.min.js"></script>
-     
+       <script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+     <script type="text/javascript" src=""></script>  
     <!--  Checkbox, Radio & Switch Plugins -->
     <script src="js/bootstrap-checkbox-radio.js"></script>
 
@@ -66,15 +64,13 @@ else{
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
     <script src="js/paper-dashboard.js"></script>
-    <script src="js/script.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 </head>
-<body ng-app="book-appointment" ng-controller="bookhistory_controller">
+<body ng-app="book-appointment" ng-controller="bookapt_controller">
 
 <div class="wrapper">
-   <div class="sidebar" data-background-color="white" data-active-color="danger">
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
 
     <!--
         Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -90,7 +86,7 @@ else{
 
             <ul class="nav">
                 
-                <li>
+                <li class="active">
                     <a href="index.php">
                         <i class="ti-view-list-alt"></i>
                         <p>Book a Doctor</p>
@@ -108,7 +104,7 @@ else{
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="booking-history.php">
                         <i class="ti-text"></i>
                         <p>Booking History</p>
@@ -140,7 +136,7 @@ else{
                     <a class="navbar-brand" href="#">User Profile</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
+                  <ul class="nav navbar-nav navbar-right">
                        <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-bell"></i>
@@ -172,46 +168,90 @@ else{
                 </div>
             </div>
         </nav>
-        <div class="content" ng-cloak>
+
+        <div class="content">
             <div class="container-fluid">
                 <div class="row">
-					<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-12 ">
                         <div class="card">
                             <div class="header text-center">
-                                <h3 class="title">Booking History</h3>
-                                <p class="category"></p>
+                                <h3 class="title"><div class="form-group">
+                                                <label>Slots Avalable on</label>
+                                                <input type="search" class="form-control input-sm" aria-controls="example" placeholder="Search by name or specialization"ng-model="searchText" ng-change="searchTextChanged()">
+                                </div></h3>
+                                
+                                <!-- <div class="col-md-12">
+                                	<div class="col-md-4">sdads</div>
+                                	<div class="col-md-4">asdasd</div>
+                                	<div class="col-md-4">asdasdas</div>	
+                                
+                                </div> -->
 								<br>
                             </div>
-                             <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
+                            <div class="content table-responsive table-full-width table-upgrade">
+                                <table class="table slots">
                                     <thead>
-                                        <th>Id</th>
-                                        <th>Doctor Name</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Reason</th>
-                                        <th>Status</th>
-                                     
+                                   
+                                    	<th class="text-center">Morning</th>
+                                    	<th class="text-center">Afternoon</th>
+                                    	<th class="text-center">Evening</th>
+                                    	<th class="text-center">Night</th>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="apt in patient_history">
-                                            <td>{{apt.appointment_id}}</td>
-                                            <td>{{apt.doctor_name}}</td>
-                                            <td>{{apt.date}}</td>
-                                            <td>{{apt.time}}</td>
-                                            <td>{{apt.reason}}</td>
-                                            <td>{{apt.experience}}</td>
-                                            <td colspan="3" ng-if="apt.checkup_status === '0' ">
-                                               <button type="button" class="btn btn-warning">Yet to visit</button>  
-                                            </td>
-                                            <td colspan="2" ng-if="apt.checkup_status === '1' "><button type="button" class="btn btn-success" style="    width: 7.6em;">Visited</button></td>  
-                                            <td ng-if="apt.checkup_status === '2' "><button type="button" class="btn btn-danger" style="width: 7.6em;">Cancelled</button></td>                     
+                                        <tr>
+                                        	<td>Components</td>
+                                        	<td>16</td>
+                                        	<td>160</td>
+                                        	<td>160</td>
                                         </tr>
-
-
+                                        <tr>
+                                        	<td>Plugins</td>
+                                        	<td>4</td>
+                                        	<td>15</td>
+                                        	<td>160</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Example Pages</td>
+                                        	<td>4</td>
+                                        	<td>25</td>
+                                        	<td>160</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Documentation</td>
+                                        	<td><i class="fa fa-times text-danger"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+                                        <tr>
+                                        	<td>SASS Files</td>
+											<td><i class="fa fa-check text-success"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Login/Register/Lock Pages</td>
+											<td><i class="fa fa-times text-danger"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+										<tr>
+                                        	<td>Premium Support</td>
+											<td><i class="fa fa-times text-danger"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+										<tr>
+                                        	<td></td>
+											<td>Free</td>
+                                        	<td>Just $39</td>
+                                        </tr>
+										<tr>
+											<td></td>
+											<td>
+												<a href="#" class="btn btn-round btn-fill btn-default disabled">Current Version</a>
+											</td>
+											<td>
+												<a target="_blank" href="http://www.creative-tim.com/product/paper-dashboard-pro/?ref=pdfree-upgrade-archive" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
+											</td>
+										</tr>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -222,10 +262,28 @@ else{
 
         <footer class="footer">
             <div class="container-fluid">
-               
-              
+                <nav class="pull-left">
+                    <ul>
+
+                        <li>
+                            <a href="http://www.creative-tim.com">
+                                Creative Tim
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://blog.creative-tim.com">
+                               Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.creative-tim.com/license">
+                                Licenses
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://athiratechnologies.com">Athira Technologies</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
                 </div>
             </div>
         </footer>
@@ -233,19 +291,18 @@ else{
     </div>
 </div>
 
-<!-- Ends Here -->
-<!-- Angular Stuff -->
+      <!-- Angular Stuff -->
     
-     <script src="js/controllers/history-book.js" type="text/javascript"></script>
-    <script src="js/directives/custom-directives.js"></script>
+     <script src="js/controllers/book-appointment.js" type="text/javascript"></script>
+
    <!-- Angular Stuff End here -->
-    <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
+
+
+
+
+
 
 </body>
 
-
 </html>
+

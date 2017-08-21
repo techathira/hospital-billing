@@ -1,0 +1,35 @@
+.image-container {
+    position: relative;
+   
+}
+.image-container .after  {
+    position: absolute;
+    top: 2em;
+    left: 10em;
+    display: none;
+    color: #FFF;
+    height:100px;
+    width:100px;
+  
+}
+.image-container:hover .after {
+    display: block;
+    background: rgba(0, 0, 0, .3);
+}
+
+.slots > thead > tr > th{
+
+	font-weight:700 !important;
+}
+.date-box{
+
+	margin-left: 6px;
+    border-radius: 13px;
+    width: 159px;
+    border-color: #66615B;
+        padding-left: 25px;
+}
+.slots-modal{width:70% !important;}
+.slot-btn{    margin: 10px;
+    padding: 3px;
+    border-radius: 18px;}

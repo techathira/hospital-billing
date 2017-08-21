@@ -1,13 +1,32 @@
 <?php
 require_once("../../database.php");
 $data = json_decode(file_get_contents("php://input"));
-$sql="select * from doctors";
-$data=array();
-$result = mysqli_query($con, $sql )or die(mysqli_error($con));
-while($row=mysqli_fetch_array($result))
-{
-	$data[]=$row;	
+$pagenum = $_GET['page'];
+$pagesize = $_GET['size'];
+$offset = ($pagenum - 1) * $pagesize;
+$search = $_GET['search'];
+
+if ($search != "") {
+    $where = "WHERE doctor_name LIKE '%" . $search . "%'";
+} else {
+    $where = "";
 }
-print json_encode($data);
+
+$sql = "SELECT COUNT(*) AS count FROM doctors $where";
+$result = mysqli_query($con, $sql )or die(mysqli_error($con));
+
+$row=mysqli_fetch_array($result);
+$count = $row['count'];
+
+$query = "SELECT * FROM doctors $where ORDER BY doctor_name, phone LIMIT $offset, $pagesize";
+$result2 = mysqli_query($con, $query )or die(mysqli_error($con));
+
+while ($row = mysqli_fetch_array($result2)) {
+    $doctors[] = $row;
+}
+
+$myData = array('doctors' => $doctors, 'totalCount' => $count);
+
+print json_encode($myData);
 
 ?>

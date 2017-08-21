@@ -1,0 +1,6 @@
+SELECT * FROM doctor_slot ds, doctor_timing dt, day d, doctors doc  WHERE ds.timing_id=dt.timing_id and dt.doctor_id = doc.doctor_id and dt.day_id=d.day_id and ds.active=1 and ds.status=0 and doc.doctor_id=1 and d.day_id=1
+
+
+/* Bookign history */
+
+SELECT pa.appointment_id, pa.date, dc.doctor_name ,dc.doctor_id FROM patient_appointment pa, doctors dc where dc.doctor_id = pa.doctor_id and pa.checkup_status=0
