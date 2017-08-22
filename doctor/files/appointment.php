@@ -4,7 +4,7 @@ if(isset($_SESSION['name']) && $_SESSION['name']=='doctor') {
 
 }
 else{
-	header('Location: ../login/index.html');
+	header('Location: ../../login/index.html');
 	die();	
 }
 

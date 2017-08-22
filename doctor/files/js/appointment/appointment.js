@@ -6,7 +6,6 @@ app.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.appointment = [];
 	$http.get("include/appointment.php")
                 .success(function(data){
-                    console.log(data);
 				 if(data.length <= 0)
 						{
 						    $scope.show_no_data=true;

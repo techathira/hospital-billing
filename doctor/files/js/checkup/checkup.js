@@ -56,7 +56,7 @@ app.controller('checkupCtrl', ['$scope', '$http', function ($scope, $http) {
 		//console.log($scope.temp);
 	};
 	$scope.delete_prescription = function(name) {  
-		  $scope.temp.splice(name);				  
+		  $scope.temp.splice(name,1);				  
 		};
 		$scope.editpres_id="";
 		//edit prescription

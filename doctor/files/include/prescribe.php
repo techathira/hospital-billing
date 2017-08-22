@@ -36,7 +36,7 @@ for($i=0;$i<sizeof($data);$i++){
 		$update_res=mysqli_query($con,$update_sql) or die(mysqli_error($con));
 	}
 }
-	$sql="UPDATE doctor_slot ds,patient_appointment pa SET pa.checkup_status=1,ds.status=0 WHERE pa.appointment_id='{$appointment_id}' and pa.slot_id=ds.slot_id";
+	$sql="UPDATE patient_appointment pa SET pa.checkup_status=1 WHERE pa.appointment_id='{$appointment_id}'";
 	$res=mysqli_query($con,$sql) or die(mysqli_error($con));
 	
 unset($_SESSION['patient_id']);
