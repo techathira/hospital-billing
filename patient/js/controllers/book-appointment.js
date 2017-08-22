@@ -4,12 +4,14 @@ var app = angular.module('book-appointment',  []);
 app.controller('bookapt_controller', ['$scope', '$http', function ($scope, $http) {
         
      
-		
+	$scope.rows_per_page = [5,10,15,20,50,100];	
     $scope.display_doctor = [];
 	$scope.currentPage = 1;
     $scope.totalItems = 0;
     $scope.pageSize = 5;
+    $scope.maxSize = 5;
     $scope.searchText = '';
+  
     getData();
 
     function getData() {
@@ -41,8 +43,6 @@ app.controller('bookapt_controller', ['$scope', '$http', function ($scope, $http
     }
 
     //Open Modal and Load today's available slots
-
-
     $scope.apt_date=null;
     $scope.avalable_slots={};
     $scope.avalable_on=$scope.bookking_doc_id='';

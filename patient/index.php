@@ -66,7 +66,7 @@ else{
     <script src="js/paper-dashboard.js"></script>
     <script src="js/script.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<!--     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script> -->
 
 
 
@@ -188,13 +188,11 @@ else{
                             <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Select per page</label>
-                                                 <select  class="form-control input-sm" ng-model="pageSize" ng-change="pageSizeChanged()">
-                                                    <option value="10" selected>10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select>
+                                                <label>Results per page</label>
+
+  
+                                                <select class="form-control input-sm" ng-model="pageSize" ng-change="pageSizeChanged()" ng-options="x for x in rows_per_page">
+</select>
                                             </div>
                                         </div>
                                         
@@ -247,19 +245,14 @@ else{
                 
                             <div class="col-sm-6">
                                 <div class="dataTables_info" ole="alert" aria-live="polite" aria-relevant="all">Showing {{startItem}} to {{endItem}} of {{totalItems}} entries</div>
-                            </div>
+                            </div> 
                             <div class="col-sm-6">
                                
-                                  <pagination 
-                                      ng-model="currentPage"
-                                      ng-change="pageChanged"
-                                      total-items="totalItems"
-                                      max-size="pageSize"  
-                                      boundary-links="true">
-                                    </pagination>
+
+                                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"   items-per-page="pageSize"></pagination>
 
                              </div>
-                            </div>
+                        </div>
                
                     </div>
 

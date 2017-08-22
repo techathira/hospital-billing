@@ -19,13 +19,13 @@ $date='';
 /* check date filter was choosen or not */
 if(!isset($apt_date)){
 
-  $date = date('2017-08-15');
+  $date = date('Y-m-d');
   $timestamp = strtotime($date);
   $day = date('l', $timestamp);
 
 }else{
  
-     $date=$data->apt_date;
+     $date=date($data->apt_date);
      $timestamp = strtotime($date);
      $day = date('l', $timestamp);
 
@@ -40,7 +40,12 @@ $day_id = $row['day_id'];
 $available_slots=[];
 if(isset($day_id)){
 
-		$sql2 = "SELECT ds.slot_id , ds.time,doc.doctor_id, doc_ses.name, doc.doctor_name FROM doctor_slot ds, doctor_timing dt, day d, doctors doc, doctor_session doc_ses  WHERE ds.timing_id=dt.timing_id  and dt.session_id=doc_ses.session_id and dt.doctor_id = doc.doctor_id and dt.day_id=d.day_id and ds.active=1 and ds.status=0 and doc.doctor_id='{$doctor_id}' and d.day_id='{$day_id}'";
+		$sql2 = "SELECT ds.slot_id , ds.time,doc.doctor_id, doc_ses.name, doc.doctor_name FROM doctor_slot ds, doctor_timing dt, day d, doctors doc, doctor_session doc_ses WHERE ds.timing_id=dt.timing_id and dt.session_id=doc_ses.session_id and dt.doctor_id = doc.doctor_id and dt.day_id=d.day_id and ds.active=1 and doc.doctor_id='{$doctor_id}' and d.day_id='{$day_id}' and NOT EXISTS
+(
+   SELECT  pa.* FROM patient_appointment pa
+   WHERE  pa.slot_id = ds.slot_id and pa.date = '{$date}' 
+)";
+
 		$result2 = mysqli_query($con, $sql2 )or die(mysqli_error($con));
 		while($row=mysqli_fetch_array($result2)){
 

@@ -24,10 +24,10 @@ if(isset($data->reason)){
 }
 
 $apt_date=$data->apt_date;
+$date_of_booking=date('Y-m-d');
 
 
-
-$sql="insert into patient_appointment(patient_id,doctor_id,date,slot_id,reason) values('{$user_id}','{$doctor_id}','{$apt_date}','{$slot_id}','{$reason}')";
+$sql="insert into patient_appointment(patient_id,doctor_id,date,date_of_booking,slot_id,reason) values('{$user_id}','{$doctor_id}','{$apt_date}','{$date_of_booking}','{$slot_id}','{$reason}')";
 
 $result = mysqli_query($con, $sql )or die(mysqli_error($con));
 
@@ -36,13 +36,19 @@ $result = mysqli_query($con, $sql )or die(mysqli_error($con));
 $response=[];
 if($result){
 
-		$sql1="update doctor_slot set status=1 where slot_id='{$slot_id}'";
-		$result1 = mysqli_query($con, $sql1 )or die(mysqli_error($con));
+
 		$response['status']="success";
 		$response['status_code']="200";
 		print json_encode($response);
 
+}else{
+
+        $response['status']="Unsuccess";
+		$response['status_code']="404";
+		print json_encode($response);
+
 }
+
 
 
 
