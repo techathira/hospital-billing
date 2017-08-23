@@ -7,8 +7,8 @@ app.controller('doctor_controller', ['$scope', '$http', function ($scope, $http)
         $scope.display_doctor=[];
 		$scope.add_doct={};
 		$scope.edit_doct={};		
-	$scope.mor_start_time=$scope.mor_end_time=$scope.mor_interval=$scope.aft_start_time=$scope.aft_end_time=$scope.aft_interval=$scope.eve_start_time=$scope.eve_end_time=$scope.eve_interval=$scope.nig_start_time=$scope.nig_end_time=$scope.nig_interval=$scope.mor_session=$scope.aft_session=$scope.eve_session=$scope.nig_session="";
-		$scope.filter={};
+	$scope.mor_start_time=$scope.mor_end_time=$scope.mor_interval=$scope.aft_start_time=$scope.aft_end_time=$scope.aft_interval=$scope.eve_start_time=$scope.eve_end_time=$scope.eve_interval=$scope.nig_start_time=$scope.nig_end_time=$scope.nig_interval="";
+		
 		//on load funtions
 		
 		
@@ -95,31 +95,19 @@ app.controller('doctor_controller', ['$scope', '$http', function ($scope, $http)
       };
 
 	  
-	 	  var input = $('#start_time');
-           input.clockpicker({
-          autoclose: true
-           });
-		   var input = $('#end_time');
-           input.clockpicker({
-          autoclose: true
-           });
+	 	 
         
 		$scope.model=[];
 			$scope.attribname='';
-		
-			
-$scope.callclock=function(){
+			$scope.callclock=function(){
 		   
-				$('.clockpicker').clockpicker({
-    placement: 'top',autoclose: true
-   }).find('input').change(function(){
-					 
+				$('.clockpicker').clockpicker().find('input').change(function(){
 		             var model = $(this).attr("ng-model");
 					 $scope.attribname=model;
 					  var input=$(this);
 					 
 					  input.trigger('input');
-					  if($scope.attribname=="option.mor_start_time")
+					  if($scope.attribname=="start_time")
 					  {
 					  $scope.model['start_time'] = this.value;
 					  }
@@ -133,6 +121,7 @@ $scope.callclock=function(){
 				});
 			
 			};
+			
           
 
 		
@@ -140,48 +129,33 @@ $scope.callclock=function(){
 		            
                     $scope.start_time=angular.element("#start_time").val();
 					$scope.end_time=angular.element("#end_time").val();
-		             if(session=="1")
+		            //console.log( $scope.start_time);
+					 
+					 if(session==1)
 					{
 						$scope.mor_start_time=$scope.start_time;
 						$scope.mor_end_time=$scope.end_time;
 						$scope.mor_interval=$scope.interval;
-						if($scope.start_time=="")
-						$scope.mor_session="";
-                        else
-						$scope.mor_session=session;
 					}
-					if(session=="2")
+					if(session==2)
 					{
 						$scope.aft_start_time=$scope.start_time;
 						$scope.aft_end_time=$scope.end_time;
 						$scope.aft_interval=$scope.interval;
-						if($scope.aft_start_time=="")
-						$scope.start_time="";
-                        else
-						$scope.aft_session=session;
 					}
-					if(session=="3")
+					if(session==3)
 					{
 						$scope.eve_start_time=$scope.start_time;
 						$scope.eve_end_time=$scope.end_time;
 						$scope.eve_interval=$scope.interval;
-						if($scope.start_time=="")
-						$scope.eve_session="";
-                        else
-						$scope.eve_session=session;
-						
 					}
-					if(session=="4")
+					if(session==4)
 					{
 						$scope.nig_start_time=$scope.start_time;
 						$scope.nig_end_time=$scope.end_time;
 						$scope.nig_interval=$scope.interval;
-						if($scope.start_time=="")
-						$scope.nig_session="";
-                        else
-						$scope.nig_session=session;
 					}
-        		   $scope.start_time=$scope.end_time=$scope.interval=session="";
+        		   $scope.start_time=$scope.end_time=$scope.interval="";
 				  
 	   };
 	   
@@ -194,7 +168,7 @@ $scope.callclock=function(){
 										
 								}).success(function(data){
 						                $scope.detail_doc=data;
-										$scope.session=data.session
+										
 										
 							
 						       }).error(function(data, status) {
@@ -212,47 +186,60 @@ $scope.callclock=function(){
 		   
 		   
 	   };
-	  
+	     $scope.model=[];
+			$scope.attribname='';
+			$scope.callclock=function(){
+		   
+				$('.clockpicker').clockpicker().find('input').change(function(){
+		             var model = $(this).attr("ng-model");
+					 $scope.attribname=model;
+					  var input=$(this);
+					 
+					  input.trigger('input');
+					  if($scope.attribname=="option.start_time")
+					  {
+					  $scope.model['start_time'] = this.value;
+					  }
+					  else{
+						  $scope.model['end_time'] = this.value;
+						  
+					  }
+					  
+					  model.value=$scope.model;
+					  $scope.$apply();
+				});
+			
+			};
           $scope.time=[];
 		 $scope.sessionvalues={};
      $scope.display_timeings=function(day){
 		   $scope.day_details=day;
-		$scope.sessionvalues={day_id:$scope.day_details.day_id,day:$scope.day_details.day,mor_session:$scope.mor_session,mor_start_time:$scope.mor_start_time,mor_end_time:$scope.mor_end_time,mor_interval:$scope.mor_interval,aft_session:$scope.aft_session,aft_start_time:$scope.aft_start_time,aft_end_time:$scope.aft_end_time,aft_interval:$scope.aft_interval,eve_session:$scope.eve_session,eve_start_time:$scope.eve_start_time,eve_end_time:$scope.eve_end_time,eve_interval:$scope.eve_interval,nig_session:$scope.nig_session,nig_start_time:$scope.nig_start_time,nig_end_time:$scope.nig_end_time,nig_interval:$scope.nig_interval};
+		$scope.sessionvalues={day_id:$scope.day_details.day_id,day:$scope.day_details.day,mor_start_time:$scope.mor_start_time,mor_end_time:$scope.mor_end_time,mor_interval:$scope.mor_interval,aft_start_time:$scope.aft_start_time,aft_end_time:$scope.aft_end_time,aft_interval:$scope.aft_interval,eve_start_time:$scope.eve_start_time,eve_end_time:$scope.eve_end_time,eve_interval:$scope.eve_interval,nig_start_time:$scope.nig_start_time,nig_end_time:$scope.nig_end_time,nig_interval:$scope.nig_interval};
 		 $scope.time.push($scope.sessionvalues);
 		 $scope.sessionvalues={};
-          $scope.mor_start_time=$scope.mor_end_time=$scope.mor_interval=$scope.aft_start_time=$scope.aft_end_time=$scope.aft_interval=$scope.eve_start_time=$scope.eve_end_time=$scope.eve_interval=$scope.nig_start_time=$scope.nig_end_time=$scope.nig_interval=$scope.mor_session=$scope.aft_session=$scope.eve_session=$scope.nig_session="";		 
-		 $scope.show_timings_list=true;
+          $scope.mor_start_time=$scope.mor_end_time=$scope.mor_interval=$scope.aft_start_time=$scope.aft_end_time=$scope.aft_interval=$scope.eve_start_time=$scope.eve_end_time=$scope.eve_interval=$scope.nig_start_time=$scope.nig_end_time=$scope.nig_interval="";		 
+		  $scope.show_edit=true;
+		  $scope.show_save=false;
+          
 	  };
 	  $scope.delete_temp_timing = function(day_id) {
 			    
-		        $scope.time.splice(day_id,1);
+		        $scope.time.splice(day_id);
 						  
 		};
 		
-	 
- 	 $scope.save_timings=function(options,index){
+	 $scope.edit_timings=function(day){
 		 
-		  
-		   $scope.time.splice(index,1,options);
-		  
-		 
+		 $scope.show_edit=false;
+		  $scope.show_save=true;
+			
+		   
 	 };	
-		$scope.save_timimgs=function(){
-            console.log($scope.time);
-		     $http({     
-						                method : 'POST' ,
-										url: 'save_doctor_timing.php',
-										data:{times:$scope.time,doctor_id:$scope.detail_doc.doctor_id}
-										
-								}).success(function(data){
-						               angular.element('#settiming').modal('hide');
-										console.log(data);
-										$scope.time=[];
-										$scope.show_timings_list=false;
-							
-						       }).error(function(data, status) {
-						                 alert("error");
-					   }); 
-		};
+ 	 $scope.save_timings=function(day){
+		 $scope.show_edit=true;
+		  $scope.show_save=false;
+		   $("#t3,#t4,#t5,#t6,#t7,#t8,#t9,#t10,#t11,#t12,#t13,#t14").attr("readonly", true);
+	 };	
+		
 	  
 }]);

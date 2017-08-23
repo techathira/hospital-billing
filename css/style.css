@@ -31,6 +31,10 @@
 { 
     text-align:center;
 }
+.text-left
+{ 
+    text-align:left;
+}
 
 a {
     text-decoration: none !important;
@@ -325,6 +329,12 @@ background-color:#28a79b;
     width: 28.125em;
 
 }
+.model-doc-size{
+
+    height: auto;
+   width: 85.125em;
+
+}
 
 .model-bg{
 background-color: #f4f4f4;
@@ -382,6 +392,15 @@ padding-right: 0px;
 }
 .align-submit{
 width: 61px;
+    height: 28px;
+    padding: 0px;
+    font-size: 12px;
+    background-color: #388cc4  !important;
+    border: none;
+    
+}
+.align-doc-submit{
+width: 84px;
     height: 28px;
     padding: 0px;
     font-size: 12px;
@@ -983,8 +1002,8 @@ width:100%;
 
 .doct-tab
 {
-    height: 11.238em;
-    width: 18.875em;
+    height: 13.238em;
+    width: 19.875em;
 
 }
 .room-tab
@@ -1370,3 +1389,9 @@ color:red;
 .select-user{ background-color:transparent; color:#3498db;padding:0px;border:none;border-bottom:1px solid #d9d9d9;outline:none;}
 .select-user option{color:#8e8e8e;}
 .submit-button{background-color: #3498db;color: white;outline:none;border:none;padding:4px 8px;}
+
+/*date 17/8/17*/
+
+.table-border{border:1px solid #ddd;}
+.padding-top-5{padding-top:5% !important;}
+.table>tbody>tr>td ,.table>tbody>tr>th{border:1px solid #ddd;}

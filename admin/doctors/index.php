@@ -21,21 +21,15 @@ else{
   <link rel="stylesheet" href="../../css/sidebar-menu.css">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/style.css">
-   
-  <script src="../../js/jquery.min.js"></script> 
+
+      <link rel="stylesheet" href="../../css/bootstrap-clockpicker.min.css">
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script> 
   <script src="../../js/angular.min.js"></script>
 <script src="../../js/custom.js"></script>  
-
-
-
-  
-  <script>
-    $(document).ready(function(){
-	   
-	});
-  
-  </script>
+<script src="../../js/bootstrap-clockpicker.min.js"></script>	
+ 
 </head>
 
 <body ng-app="doctor">
@@ -99,7 +93,14 @@ else{
 						   <td>Gender :</td><td>{{doctor.gender}}</td>
 						</tr>
            </table>	
-	
+	        <div class="col-md-7 col-xs-7 col-lg-7 col-sm-7" style="padding: 0px 0px 0px 7px;">
+					&nbsp;
+				</div>
+				 <div class="col-md-5 col-xs-5 col-lg-5 col-sm-5 adjust-edit-delete" >
+					<button type = "submit" class = "btn btn-primary align-doc-submit edit" data-toggle = "modal" data-target = "#settiming" id="" ng-click="get_doctor_details(doctor.doctor_id)" >
+						Set Timing
+                  </button>
+				  </div>
  	</div>
  
 </div>
@@ -227,6 +228,201 @@ else{
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
   
+  
+   <!-- Add ned Modal -->
+<div class = "adjust-model modal fade" id = "settiming" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" style="width:100%!important;" >
+   
+   <div class = "modal-dialog " style="width:100%!important;">
+      <div class = "modal-content  model-doc-size ">
+         
+         <div class = "modal-header" style="    padding: 25px;">
+		  
+            <button type = "button" class = "close adjust-close" data-dismiss = "modal" aria-hidden = "true">
+                    <img src="../../icons/close.png" ></img>
+            </button>
+            
+            <h4 class = "modal-title align-model-header font-lato-18-bold" id = "myModalLabel">
+                 Set Timings
+            </h4>
+         </div>
+         
+<div class = "modal-body body-size row model-bg">
+
+	<form  novalidate class="form-horizontal" name="add_dept" id="add_dept" method="post">
+		  
+		    <div class="form-group align-input-space font-lato-12-bold" >
+		  	
+				
+					<label class="control-label col-sm-1 col-lg-1 col-xs-12 col-md-1 align-label" style="margin-top: 0%;" for="name" >Name</label>
+			  
+			  <div class=" col-sm-8 col-lg-8 col-xs-12 col-md-8" style="height: 100%;">
+				<input type="text" class="form-control align-input-ele font-lato-12-bold" ng-model="detail_doc.doctor_name" readonly>
+			  </div>
+			  
+			  <div class=" col-sm-1 col-lg-1 col-xs-12 col-md-1">
+			  
+			  </div>
+			</div>
+			 <div class="form-group align-input-space font-lato-12-bold">
+								  <label class="control-label col-sm-1 col-lg-1 col-xs-12 col-md-1 align-label" for="name" >Select Day</label>
+								  <div class=" col-sm-8 col-lg-8 col-xs-12 col-md-8 float-left-inputs">
+								  
+								                 <select class="form-control drop-down-btn  " id="country" name="country" ng-model="day" ng-options="days as days.day for days in doc_days" ng-change="clear_array()" placeholder="select Day">
+												 												
+												  </select>
+									 
+								  </div>
+										  <div class=" col-sm-1 col-lg-1 col-xs-12 col-md-1">
+										  
+										  </div>
+					 </div>
+				<div class="form-group align-input-space font-lato-12-bold">
+								  <label class="control-label col-sm-1 col-lg-1 col-xs-12 col-md-1 align-label" for="name" >Select Session</label>
+								  <div class=" col-sm-8 col-lg-8 col-xs-12 col-md-8 float-left-inputs" >
+								  
+								      <div class=" col-sm-3 col-lg-3 col-xs-12 col-md-3 float-left-inputs" ng-repeat="sess in session">
+												 <input type="radio" name="gender" value="{{sess.session_id}}" ng-model="filter.session_id" ng-click="display_time(sess.session_id)">{{sess.name}}</div>
+												  
+									 
+								  </div>
+										  <div class=" col-sm-1 col-lg-1 col-xs-12 col-md-1">
+										  
+										  </div>
+					 </div>
+					  
+					 <div class="form-group align-input-space font-lato-12-bold">
+								  <label class="control-label col-sm-1 col-lg-1 col-xs-12 col-md-1 align-label" for="name" >Select Time</label>
+								  <div class="col-sm-8 col-lg-8 col-xs-12 col-md-8 float-left-inputs">
+								  
+								      <table style="width:100%">
+									  <tr>
+										<th>Start Time</th>
+										<th>End Time</th> 
+										<th>Interval</th>
+										<th></th>
+									  </tr>
+									  <tr>
+										<td class="text-left"><input type="text" id="start_time" class="input-small form-control align-input-ele font-lato-12-bold" ng-model="start_time" placeholder="Start Time" style="    width: 80%;" ></td>
+										<td class="text-left"><input type="text"  id="end_time" class="input-small form-control align-input-ele font-lato-12-bold" ng-model="end_time"  placeholder="End Time" style="    width: 80%;"></td>
+										<td class="text-left"><input type="text" class="form-control align-input-ele font-lato-12-bold" ng-model="interval"  placeholder="Enter No of Beds" style="    width: 80%;"></td>
+										<td><button type = "submit" class = "btn btn-primary align-doc-submit edit" ng-click="check_time(filter.session_id)">Save</button></td>
+									  </tr>
+									 
+									</table>
+									 
+								  </div>
+										  <div class=" col-sm-1 col-lg-1 col-xs-12 col-md-1">
+										  
+										  </div>
+					 </div>
+			 <div class="form-group align-input-space font-lato-12-bold">&nbsp;</div>
+			
+			<div class="form-group align-input-space font-lato-12-bold">
+			  <label class="control-label col-sm-3 col-lg-3 col-xs-12 col-md-3 align-label" for="name"></label>
+			  <div class=" col-sm-8 col-lg-8 col-xs-12 col-md-8  adjust-restric" style="height: 100%;">
+				   <a id="add-emp"  href="#" ng-click="display_timeings(day)">
+				   <img src="../../icons/employee/add.png" ></img>
+								<span style="padding-left:3px;" >Show Timing</span>
+					</a>
+			  </div>
+			  
+			  <div class=" col-sm-1 col-lg-1 col-xs-12 col-md-1">
+			  
+			  </div>
+			</div>
+			
+
+			  
+			<div class="col-md-8 col-sm-8 col-lg-12 col-xs-12 table-responsive" id="myDiv" ng-show="show_timings_list"	>
+		<table class="table table-border text-center" id="tablename">
+			<tr >
+				<th rowspan="3" class="text-center padding-top-5">Doctor Name</th>
+				<th rowspan="3" class="text-center padding-top-5">Day</th>
+				<th colspan="12" class="text-center">Timing</th>
+				<th rowspan="3" colspan="2"></th>
+				
+			</tr>
+			<tr>
+				<th colspan="3" class="text-center">Morning</th>
+				<th colspan="3" class="text-center">Afternoon</th>
+				<th colspan="3" class="text-center">evening</th>
+				<th colspan="3" class="text-center">Night</th>
+				
+			</tr>
+			<tr>
+				<th class="text-center">Start Time</th>
+				<th class="text-center">End Time</th>
+				<th class="text-center">Interval</th>
+				<th class="text-center">Start Time</th>
+				<th class="text-center">End Time</th>
+				<th class="text-center">Interval</th>
+                <th class="text-center">Start Time</th>
+				<th class="text-center">End Time</th>
+				<th class="text-center">Interval</th>
+				<th class="text-center">Start Time</th>
+				<th class="text-center">End Time</th>
+				<th class="text-center">Interval</th>
+			</tr>
+			<div >
+        
+       <tbody ng-repeat="options in time" ng-init="show='edit'">
+         <tr  ng-show="show=='save'">
+			<td >{{detail_doc.doctor_name}}</td>
+			<td >{{options.day}}</td>
+			<td class="clockpicker"><input type="text"  class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.mor_start_time"  placeholder="Start Time" style="    width: 100%;"  ng-click="callclock()"id="tdid{{$index}}"  ></td>
+			<td class="clockpicker"><input type="text"  class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.mor_end_time"  placeholder="Start Time" style="    width: 100%;" ng-click="callclock()" ></td>
+			<td><input type="text"  class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.mor_interval"  placeholder="Start Time" style="    width: 100%;" ></td>
+			<td class="clockpicker"><input type="text"  class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.aft_start_time"  placeholder="Start Time" style="    width: 100%;" ng-click="callclock()"  ></td>
+			<td class="clockpicker"><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.aft_end_time"  placeholder="Start Time" style="    width: 100%;" ng-click="callclock()"  ></td>
+			<td><input type="text"   class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.aft_interval"  placeholder="Start Time" style="    width: 100%;"  ></td>
+			<td class="clockpicker"><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.eve_start_time"  ng-click="callclock()" placeholder="Start Time" style="    width: 100%;" ></td>
+			<td class="clockpicker"><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.eve_end_time" ng-click="callclock()" placeholder="Start Time" style="    width: 100%;" ></td>
+			<td><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.eve_interval"  placeholder="Start Time" style="    width: 100%;" ></td>
+			<td class="clockpicker"><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.nig_start_time" ng-click="callclock()" placeholder="Start Time" style="    width: 100%;" ></td>
+			<td class="clockpicker"><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.nig_end_time" ng-click="callclock()" placeholder="Start Time" style="    width: 100%;" ></td>
+			<td><input type="text" class="input-small form-control align-input-ele font-lato-12-bold " ng-model="options.nig_interval"  placeholder="Start Time" style="    width: 100%;" ></td>
+			<td ><div  ng-click="show='edit';save_timings(options,$index)" class="save pointer" id="{{$index}}">Save</div> </td>
+			<td class="pointer" >Delete</td>
+		</tr>
+		<tr  class="line" id="trid{{$index}}" ng-show="show=='edit'">
+			<td >{{detail_doc.doctor_name}}</td>
+			<td >{{options.day}}</td>
+			<td >{{options.mor_start_time}}</td>
+			<td>{{options.mor_end_time}}</td>
+			<td>{{options.mor_interval}}</td>
+			<td>{{options.aft_start_time}}</td>
+			<td>{{options.aft_end_time}}</td>
+			<td>{{options.aft_interval}}</td>
+			<td>{{options.eve_start_time}}</td>
+			<td>{{options.eve_end_time}}</td>
+			<td>{{options.eve_interval}}</td>
+			<td>{{options.nig_start_time}}</td>
+			<td>{{options.nig_end_time}}</td>
+			<td>{{options.nig_interval}}</td>
+			<td id="edit"><div  ng-click="show='save';" class="editonclick pointer" id="{{$index}}">Edit</div></td>
+			<td class="pointer" ng-click="delete_temp_timing($index)" >Delete</td>
+		</tr>
+		<tbody>
+	</table>
+	</div>
+			
+		
+    </div>	
+         <div class = "modal-footer">
+            <a><span data-dismiss = "modal">
+               Cancel or</span></a>
+            <button type = "submit" class = "btn btn-primary align-submit"  ng-click="save_timimgs()" >
+               Add
+            </button>
+         </div>
+		  </form>
+         </div> 
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+
+  
 <!--Edit Doctor Model -->
 
 <div class = "adjust-model modal fade" id = "editdoctor" tabindex = "-1" role = "dialog" 
@@ -331,9 +527,9 @@ else{
       </div>
 	   
    </div> 
- 
 
- 
+ <script src="../../js/doctorscript/doctorscript.js"></script>  
+
  
  
  
@@ -342,7 +538,8 @@ else{
  </div>
  </div> <!-- Row End -->
 </div>  <!-- Container End -->
-     <script src="../../js/doctorscript/doctorscript.js"></script>  
+    
+
 </body> <!-- Body End -->
 
 </html>
