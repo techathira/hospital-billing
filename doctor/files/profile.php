@@ -36,9 +36,9 @@ else{
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript" src="../../js/angular.min.js"></script>
-	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<!--  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	  <script type="text/javascript" src="js/Jquery1-ui.js"></script>
-		
+		-->
 	
 	<script type="text/javascript" src="js/bootstrap-notify.js"></script> <!-- for Notify js -->
 	
@@ -57,7 +57,7 @@ else{
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hospital</span></a>
+              <a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Hospital</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -65,11 +65,11 @@ else{
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img ng-src="{{display_data.photo}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2><?php echo $_SESSION['doctor_name'];?></h2>
+                <h2>{{display_data.doctor_name}}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -93,8 +93,7 @@ else{
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                       <li><a href="report.php">Patient Report</a></li>
                     </ul>
                   </li>
 
@@ -122,7 +121,7 @@ else{
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""> <?php echo $_SESSION['doctor_name'];?>
+                    <img ng-src="{{display_data.photo}}" alt=""> {{display_data.doctor_name}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -149,10 +148,20 @@ else{
 		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-16">
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 padding-none">
 			<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none margin-bottom">
-				<img src="../../icons/doctor.jpg" alt=""     style="height: 130px;" />
+				<img ng-src="{{display_data.photo}}"  style="height: 130px;" />
 			</div>
-			<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none text-center font-blue">
+			
+			<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none text-center font-blue cursor-pointer" ng-click="uploadfile()" >
 				Upload Photo
+			</div>
+			
+			<div class="text-center" ng-init="show_save_btn=false" ng-show="show_save_btn">
+				<button  ng-click="uploadFile()" class="btn btn-primary">save me</button>
+				{{myFile.name}}
+		   </div>
+			<!-- Hidden file button -->
+			 <div class="form-group" style="display:none;" > 
+				<input type="file" name="file"  id="upload"  file-model="myFile" >
 			</div>
 			<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 padding-none text-center font-blue cursor-pointer" data-toggle="modal" data-target="#change_password">
 				Change Password
@@ -195,52 +204,31 @@ else{
 						</tr>
 						<tr>
 							<td>Monday</td>
-							<td></td>
-							<td>01:30 - 3:00</td>
-							<td>05:00 - 07:45</td>
-							<td>10:00 - 11:30</td>
+							<td ng-repeat="monday in display_timing.Monday">{{monday.from_time}} - {{monday.to_time}}</td>
 						</tr>
 						<tr>
 							<td>Tuesday</td>
-							<td>08:00 - 10:00 </td>
-							<td>01:30 - 3:00</td>
-							<td></td>
-							<td>10:00 - 11:30</td>
+							<td ng-repeat="tuesday in display_timing.Tuesday">{{tuesday.from_time}} - {{tuesday.to_time}}</td>
 						</tr>
 						<tr>
 							<td>Wednesday</td>
-							<td></td>
-							<td>01:30 - 3:00</td>
-							<td>05:00 - 07:45</td>
-							<td></td>
+							<td ng-repeat="wednesday in display_timing.Wednesday">{{wednesday.from_time}} - {{wednesday.to_time}}</td>
 						</tr>
 						<tr>
 							<td>Thursday</td>
-							<td>08:00 - 10:00 </td>
-							<td></td>
-							<td></td>
-							<td>10:00 - 11:30</td>
+							<td ng-repeat="Thursday in display_timing.Thursday">{{Thursday.from_time}} - {{Thursday.to_time}}</td>
 						</tr>
 						<tr>
 							<td>Friday</td>
-							<td> </td>
-							<td>01:30 - 3:00</td>
-							<td></td>
-							<td>10:00 - 11:30</td>
+							<td ng-repeat="Friday in display_timing.Friday">{{Friday.from_time}} - {{Friday.to_time}}</td>
 						</tr>
 						<tr>
 							<td>Saturday</td>
-							<td></td>
-							<td>01:30 - 3:00</td>
-							<td>05:00 - 07:45</td>
-							<td></td>
+							<td ng-repeat="Saturday in display_timing.Saturday">{{Saturday.from_time}} - {{Saturday.to_time}}</td>
 						</tr>
 						<tr>
 							<td>Sunday</td>
-							<td>08:00 - 10:00 </td>
-							<td>01:30 - 3:00</td>
-							<td>05:00 - 07:45</td>
-							<td></td>
+							<td ng-repeat="Sunday in display_timing.Sunday">{{Sunday.from_time}} - {{Sunday.to_time}}</td>
 						</tr>
 					</table>
 				</div>
@@ -272,9 +260,10 @@ else{
         <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 padding-none font-16">
 			<div class="group col-md-12 col-sm-12 col-lg-12 padding-none"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="password"  class="module-input" ng-model="password.old" required=""  />
+					  <input type="password"  name="oldpassword" class="module-input" ng-model="password.old" required=""  old-password/>
 				  <span class="bar"></span>
 				  <label class="label-text" >Old password</label>
+				   <span ng-show="password.oldpassword.$error.oldPassword" class="font-12 font-red">Enter the Old Password</span>
 				  </div>
 				</div>
 		</div>
@@ -330,6 +319,8 @@ else{
 	
 <!-- SCRIPT -->
 <script type="text/javascript" src="js/profile/profile.js"></script>
+<script type="text/javascript" src="js/directives/custom-directives.js"></script>
+<script type="text/javascript" src="js/services/profile-services.js" ></script>
 
   </body>
 </html>

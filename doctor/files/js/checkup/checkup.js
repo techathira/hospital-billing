@@ -2,6 +2,14 @@ var app = angular.module('checkup', []);
 
 app.controller('checkupCtrl', ['$scope', '$http', function ($scope, $http) {
 
+//docotor information
+	$http.get("include/profile_details.php").success(function(data){
+		$scope.display_data = data;
+	}).error(function() {
+		$scope.data = "error in fetching data";
+	});
+	
+	//patient_info	
 		$http.get("include/patient_details.php")
 		.success(function(data){
 			
@@ -53,7 +61,19 @@ app.controller('checkupCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.prescription_table=true;
 	$scope.temp.push($scope.prescription);
 	$scope.prescription="";
-		//console.log($scope.temp);
+	console.log($scope.prescription.drug_id);
+	if($scope.prescription.drug_id="undefined"){
+		 $.notify({
+									message: 'Please add the new drug',	
+							},{
+								placement: {
+									from: "top",
+									align: "center"
+								},
+								type: 'danger'
+							});
+	}
+		console.log($scope.temp);
 	};
 	$scope.delete_prescription = function(name) {  
 		  $scope.temp.splice(name,1);				  

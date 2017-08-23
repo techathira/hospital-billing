@@ -5,7 +5,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', function ($scope, $http) {
 	//doctor  information 
 	$http.get("include/doctor_details.php")
                 .success(function(data){
-				console.log(data.session_info);
+				//console.log(data.session_info);
 					
 					$scope.doctor_info=data.doctor_info;
 					$scope.appointment_info=data.appointment_info;

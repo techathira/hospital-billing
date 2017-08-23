@@ -1,42 +1,40 @@
-var app = angular.module('view_histroy', []);
+var app = angular.module('report', []);
 
-app.controller('histroyCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('reportCtrl', ['$scope', '$http', function ($scope, $http) {
 
-
-//docotor information
-	$http.get("include/profile_details.php").success(function(data){
+//Doctor profile
+	$http.get("include/profile_details.php")
+	.success(function(data){
 		$scope.display_data = data;
-	}).error(function() {
+		
+	})
+	.error(function() {
 		$scope.data = "error in fetching data";
 	});
-				
-				
+
+
 	//appointment	list
-	$http.get("include/patient_info.php")
+	$scope.appointment = [];
+	$http.get("include/report.php")
                 .success(function(data){
-                   $scope.patient_name = data.name[0];	
-                   $scope.patient_info = data.history;	
-					if(data.length <= 0)
+				//console.log(data);
+				 if(data.length <= 0)
 						{
 						    $scope.show_no_data=true;
 							$scope.show_data_div=false;
 						}
 						else
 						{ 
+						  $scope.report_details = data;
 						  $scope.show_data_div=true;
 						  $scope.show_no_data=false;
 						}
+					
                 })
                 .error(function() {
                     $scope.data = "error in fetching data";
                 });
 				
-
-	
-	$scope.check_up=function(){
-		window.location.href="checkup.php";
-	};
-	
 	//prescription
 	$scope.prescription=function(appointment_id,date){
 	  $http({     
@@ -51,15 +49,17 @@ app.controller('histroyCtrl', ['$scope', '$http', function ($scope, $http) {
 					 alert("error");
 		});
 	};
-	$scope.filter_history = function() {
+	
+	
+	 //filter_report by date
+	$scope.filter_report = function() {
 	
 		$http({     
 					method : 'POST' ,
-					url: 'include/filter_history.php',
+					url: 'include/filter_report.php',
 					data:{from_date:$scope.from_date,to_date:$scope.to_date}
 							
 					}).success(function(data){
-					
 						if(data.length <= 0)
 						{
 						    $scope.show_no_data=true;
@@ -67,7 +67,7 @@ app.controller('histroyCtrl', ['$scope', '$http', function ($scope, $http) {
 						}
 						else
 						{ 
-						  	$scope.patient_info = data;
+						   $scope.report_details = data;
 						  $scope.show_data_div=true;
 						  $scope.show_no_data=false;
 						}
@@ -75,6 +75,8 @@ app.controller('histroyCtrl', ['$scope', '$http', function ($scope, $http) {
 							 alert("error");
 		   });
 	}; 
+	
+
 }]);
 
 app.directive('datepicker', function() {

@@ -51,7 +51,7 @@ else{
 	
   </head>
 
-  <body class="nav-md" ng-app="view_appointment" ng-controller="appointmentCtrl" ng-cloak >
+  <body class="nav-md" ng-app="report" ng-controller="reportCtrl" ng-cloak >
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -158,7 +158,7 @@ else{
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-22 padding-none margin-top-10-less">
 				<div class="group col-md-12 col-sm-12 col-lg-12"> 
 				<div class="col-md-12 col-sm-12 col-lg-12 padding-none">	
-					  <input type="text"  class="module-input" required="" datepicker="" ng-model="to_date"  ng-change="filter_appoinment()"/>
+					  <input type="text"  class="module-input" required="" datepicker="" ng-model="to_date"  ng-change="filter_report()"/>
 				  <span class="bar"></span>
 				  <label class="label-text" >To Date</label>
 				  </div>
@@ -182,17 +182,15 @@ else{
 			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">Sl No</div>
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">Patient Name</div>
 			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">Date</div>
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">Time</div>
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">Reason</div>
 			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">&nbsp;</div>
 		</div>
-		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom" ng-repeat="appointment_details in appointment | filter:patient_search" ng-show="show_data_div">
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom" ng-repeat="report in report_details | filter:patient_search" ng-show="show_data_div">
 			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">{{$index}}</div>
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none uppercase">{{appointment_details.patient_name}}</div>
-			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">{{appointment_details.date}}</div>
-			<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4 font-16 padding-none">{{appointment_details.time}}</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">{{appointment_details.reason}}</div>
-			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none"><span ng-click="check_up(appointment_details.patient_id,appointment_details.appointment_id)" class="pointer">Check Up</span> &nbsp;&nbsp;&nbsp; <span class="pointer" ng-click="histroy(appointment_details.patient_id,appointment_details.appointment_id)">Histroy</span></div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none uppercase">{{report.patient_name}}</div>
+			<div class="col-md-2 col-sm-2 col-lg-2 col-xs-4 font-16 padding-none">{{report.date}}</div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none">{{report.reason}}</div>
+			<div class="col-md-3 col-sm-3 col-lg-3 col-xs-4 font-16 padding-none"><span ng-click="prescription(report.appointment_id,report.date)" class="pointer font-blue" data-toggle="modal" data-target="#prescription">Prescription</span> &nbsp;&nbsp;&nbsp; <span class="pointer font-blue" >Lab Tests</span></div>
 		</div>
          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 margin-bottom" ng-show="show_no_data">
 		     <center>No Data Found</center>
@@ -204,6 +202,68 @@ else{
         </div>
         <!-- /page content -->
 
+		<!-- Modal -->
+
+
+<!--Change password Modal -->
+<div id="prescription" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:67%;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Prescription for date {{fordate}}</h4>
+      </div>
+      <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 modal-body">
+      <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 table-responsive">
+
+				<table class="table table-border text-center">
+			<tr >
+				<th rowspan="3" class="text-center padding-top-5">Drug Name</th>
+				<th rowspan="3" class="text-center padding-top-5">Dosage</th>
+				<th colspan="6" class="text-center">Timing</th>
+			</tr>
+			<tr>
+				<th colspan="2" class="text-center">Morning</th>
+				<th colspan="2" class="text-center">Afternoon</th>
+				<th colspan="2" class="text-center">Night</th>
+				
+			</tr>
+			<tr>
+				<th class="text-center">BF</th>
+				<th class="text-center">AF</th>
+				<th class="text-center">BF</th>
+				<th class="text-center">AF</th>
+                <th class="text-center">BF</th>
+				<th class="text-center"> AF</th>
+			</tr>
+			
+         <tr ng-repeat="display_drug in drugs">
+			<td>{{display_drug.drug_name}}</td>
+			<td>{{display_drug.dosage}}</td>
+			<td>{{display_drug.mbf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.maf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.abf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.aaf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.nbf=="1" ? 'yes' : ''}}</td>
+			<td>{{display_drug.naf=="1" ? 'yes' : ''}}</td>
+
+		</tr>
+		  
+	</table>
+		</div>
+
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
         <!-- footer content -->
    
         <!-- /footer content -->
@@ -213,7 +273,7 @@ else{
 	 <!-- Custom Theme Scripts -->
    <script src="../build/js/custom.min.js"></script>
 	
-<script type="text/javascript" src="js/appointment/appointment.js"></script>
+<script type="text/javascript" src="js/report/report.js"></script>
 
   </body>
 </html>

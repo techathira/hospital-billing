@@ -68,7 +68,7 @@ else{
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Hospital</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -76,7 +76,7 @@ else{
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="{{doctor_info.photo}}" alt="..." class="img-circle profile_img">
+                <img ng-src="{{doctor_info.photo}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -104,8 +104,7 @@ else{
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <li><a href="report.php">Patient Report</a></li>
                     </ul>
                   </li>
 
@@ -133,7 +132,7 @@ else{
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{doctor_info.photo}}" alt="">{{doctor_info.doctor_name}}
+                    <img ng-src="{{doctor_info.photo}}" alt="">{{doctor_info.doctor_name}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

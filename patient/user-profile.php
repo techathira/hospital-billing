@@ -193,7 +193,7 @@ else{
                                         </div>
                                   <!-- Hidden file button -->
                                          <div class="form-group" style="display:none;" > 
-                                        <input type="file" name="file"  id="upload"  file-model="myFile" >
+											<input type="file" name="file"  id="upload"  file-model="myFile" >
                                         </div>
                                           
                               

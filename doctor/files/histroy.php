@@ -36,7 +36,6 @@ else{
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript" src="../../js/angular.min.js"></script>
-	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	  <script type="text/javascript" src="js/Jquery1-ui.js"></script>
 		
 	
@@ -65,11 +64,11 @@ else{
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img ng-src="{{display_data.photo}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2><?php echo $_SESSION['doctor_name'];?></h2>
+                <h2>{{display_data.doctor_name}}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -93,8 +92,7 @@ else{
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                       <li><a href="report.php">Patient Report</a></li>
                     </ul>
                   </li>
 
@@ -122,7 +120,7 @@ else{
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""> <?php echo $_SESSION['doctor_name'];?>
+                    <img ng-src="{{display_data.photo}}" alt=""> {{display_data.doctor_name}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

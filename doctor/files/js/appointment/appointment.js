@@ -2,6 +2,14 @@ var app = angular.module('view_appointment', []);
 
 app.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http) {
 
+//docotor information
+	$http.get("include/profile_details.php").success(function(data){
+		$scope.display_data = data;
+	}).error(function() {
+		$scope.data = "error in fetching data";
+	});
+
+
 	//appointment	list
 	$scope.appointment = [];
 	$http.get("include/appointment.php")
